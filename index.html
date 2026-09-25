@@ -8,7 +8,8 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
-:root{
+/* Dynamic Theme Variables */
+:root {
   --bg: #0E1319;
   --bg-alt: #10161D;
   --panel: #171F29;
@@ -18,208 +19,259 @@
   --text: #E9EDF2;
   --text-dim: #9AA6B4;
   --text-faint: #63707F;
-  --teal: #2FD9B0;
-  --teal-dim: #1B8A70;
+  --brand-primary: #2FD9B0;
+  --brand-secondary: #5B9FE8;
+  --brand-accent: #E8C468;
   --amber: #F2A93B;
   --red: #F2545B;
-  --red-dim: #7A2E32;
-  --gold: #E8C468;
+  --green: #2FD9B0;
   --blue: #5B9FE8;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
+  --glow: rgba(47,217,176,0.12);
+}
+
+/* Estácio Theme Mode */
+body.theme-estacio {
+  --bg: #0A1118;
+  --bg-alt: #0D1722;
+  --panel: #132232;
+  --panel-2: #1A2D42;
+  --stroke: #243B54;
+  --stroke-soft: #1B2F44;
+  --text: #F0F6FC;
+  --text-dim: #A3B8CC;
+  --text-faint: #657D95;
+  --brand-primary: #0080FF;
+  --brand-secondary: #38BDF8;
+  --brand-accent: #FF3B30;
+  --amber: #FF9500;
+  --red: #FF3B30;
+  --green: #34C759;
+  --blue: #0080FF;
+  --glow: rgba(0,128,255,0.18);
+}
+
+/* Wyden Theme Mode */
+body.theme-wyden {
+  --bg: #140C16;
+  --bg-alt: #1A101C;
+  --panel: #231626;
+  --panel-2: #2E1D32;
+  --stroke: #422948;
+  --stroke-soft: #321E37;
+  --text: #FAF5FB;
+  --text-dim: #C4B1C7;
+  --text-faint: #816A85;
+  --brand-primary: #E02470;
+  --brand-secondary: #F59E0B;
+  --brand-accent: #C026D3;
+  --amber: #F59E0B;
+  --red: #EF4444;
+  --green: #10B981;
+  --blue: #E02470;
+  --glow: rgba(224,36,112,0.18);
 }
 
 *{box-sizing:border-box; margin:0; padding:0;}
-html,body{background:var(--bg); color:var(--text); font-family:var(--font-body); -webkit-font-smoothing:antialiased;}
+html,body{background:var(--bg); color:var(--text); font-family:var(--font-body); -webkit-font-smoothing:antialiased; transition: background 0.3s ease, color 0.3s ease;}
 body{
   background:
-    radial-gradient(circle at 12% 0%, rgba(47,217,176,0.06), transparent 40%),
-    radial-gradient(circle at 88% 10%, rgba(242,84,91,0.05), transparent 45%),
+    radial-gradient(circle at 12% 0%, var(--glow), transparent 40%),
+    radial-gradient(circle at 88% 10%, rgba(242,84,91,0.04), transparent 45%),
     var(--bg);
   min-height:100vh;
   padding-bottom:60px;
 }
 
-::selection{background:var(--teal); color:#0E1319;}
+::selection{background:var(--brand-primary); color:#000;}
 
-/* scrollbar */
 ::-webkit-scrollbar{width:8px; height:8px;}
 ::-webkit-scrollbar-track{background:var(--bg-alt);}
 ::-webkit-scrollbar-thumb{background:var(--stroke); border-radius:4px;}
 
-.wrap{max-width:1360px; margin:0 auto; padding:0 28px;}
+.wrap{max-width:1380px; margin:0 auto; padding:0 28px;}
 
-/* ---------- HEADER ---------- */
+/* HEADER */
 header.top{
   border-bottom:1px solid var(--stroke-soft);
-  background:linear-gradient(180deg, rgba(23,31,41,0.6), transparent);
+  background:linear-gradient(180deg, var(--panel), transparent);
   padding:22px 0 0 0;
   position:sticky; top:0; z-index:50;
   backdrop-filter: blur(14px);
-  background-color: rgba(14,19,25,0.86);
+  background-color: rgba(14,19,25,0.88);
+  transition: all 0.3s ease;
 }
 .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap; padding-bottom:18px;}
 .brand{display:flex; align-items:center; gap:14px;}
 .brand-mark{
-  width:42px; height:42px; border-radius:10px;
-  background:linear-gradient(135deg, var(--teal), var(--teal-dim));
+  width:44px; height:44px; border-radius:12px;
+  background:linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
   display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-display); font-weight:700; color:#08211B; font-size:18px;
-  flex-shrink:0;
+  font-family:var(--font-display); font-weight:700; color:#FFFFFF; font-size:20px;
+  flex-shrink:0; box-shadow: 0 4px 12px var(--glow);
+  transition: all 0.3s ease;
 }
-.brand h1{font-family:var(--font-display); font-size:20px; font-weight:600; letter-spacing:0.2px;}
-.brand p{font-size:12.5px; color:var(--text-dim); margin-top:2px; font-family:var(--font-mono); letter-spacing:0.3px;}
+.brand h1{font-family:var(--font-display); font-size:21px; font-weight:700; letter-spacing:0.2px;}
+.brand p{font-size:12px; color:var(--text-dim); margin-top:2px; font-family:var(--font-mono); letter-spacing:0.4px;}
 
-.period-switch{display:flex; gap:6px; background:var(--panel); border:1px solid var(--stroke); border-radius:10px; padding:4px;}
+.period-switch{display:flex; gap:6px; background:var(--panel); border:1px solid var(--stroke); border-radius:12px; padding:4px;}
 .period-switch button{
-  font-family:var(--font-mono); font-size:12.5px; letter-spacing:0.4px; color:var(--text-dim);
-  background:transparent; border:none; padding:8px 16px; border-radius:7px; cursor:pointer;
-  transition:all .15s ease; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:12px; letter-spacing:0.5px; color:var(--text-dim);
+  background:transparent; border:none; padding:8px 18px; border-radius:8px; cursor:pointer;
+  transition:all .2s ease; text-transform:uppercase; font-weight:600;
+  display:flex; align-items:center; gap:8px;
 }
 .period-switch button:hover{color:var(--text);}
-.period-switch button.active{background:var(--teal); color:#08211B; font-weight:600;}
+.period-switch button.active{
+  background:var(--brand-primary); color:#FFFFFF;
+  box-shadow: 0 2px 8px var(--glow);
+}
+.period-switch button.active.btn-estacio { background: #0080FF; }
+.period-switch button.active.btn-wyden { background: #E02470; }
 
-nav.tabs{display:flex; gap:2px; border-bottom:1px solid var(--stroke-soft); margin-top:4px;}
+nav.tabs{display:flex; gap:4px; border-bottom:1px solid var(--stroke-soft); margin-top:4px;}
 nav.tabs button{
-  font-family:var(--font-body); font-size:13.5px; font-weight:500; color:var(--text-faint);
-  background:transparent; border:none; padding:12px 18px; cursor:pointer; position:relative; top:1px;
-  border-bottom:2px solid transparent; transition:color .15s ease;
+  font-family:var(--font-body); font-size:13.5px; font-weight:600; color:var(--text-faint);
+  background:transparent; border:none; padding:12px 20px; cursor:pointer; position:relative; top:1px;
+  border-bottom:2px solid transparent; transition:color .15s ease, border-color .15s ease;
 }
 nav.tabs button:hover{color:var(--text-dim);}
-nav.tabs button.active{color:var(--text); border-bottom-color:var(--teal);}
+nav.tabs button.active{color:var(--text); border-bottom-color:var(--brand-primary);}
 
 main{padding-top:26px;}
 section.view{display:none;}
 section.view.active{display:block; animation:fade .35s ease;}
 @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
 
-.eyebrow{font-family:var(--font-mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-faint); margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+.eyebrow{font-family:var(--font-mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-faint); margin-bottom:12px; display:flex; align-items:center; gap:8px;}
 .eyebrow::before{content:''; width:16px; height:1px; background:var(--stroke); display:inline-block;}
 
-/* ---------- HERO KPI ---------- */
+/* HERO KPI */
 .hero{
-  display:grid; grid-template-columns:1.3fr 1fr; gap:20px; margin-bottom:20px;
+  display:grid; grid-template-columns:1.3fr 1fr; gap:20px; margin-bottom:22px;
 }
-@media (max-width:900px){ .hero{grid-template-columns:1fr;} }
+@media (max-width:920px){ .hero{grid-template-columns:1fr;} }
 
 .hero-card{
   background:linear-gradient(145deg, var(--panel-2), var(--panel));
-  border:1px solid var(--stroke); border-radius:16px; padding:26px 28px; position:relative; overflow:hidden;
+  border:1px solid var(--stroke); border-radius:18px; padding:26px 28px; position:relative; overflow:hidden;
 }
 .hero-card::after{
-  content:''; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%;
-  background:radial-gradient(circle, rgba(47,217,176,0.10), transparent 70%);
+  content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; border-radius:50%;
+  background:radial-gradient(circle, var(--glow), transparent 70%);
 }
 .hero-label{font-family:var(--font-mono); font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.8px;}
-.hero-value{font-family:var(--font-display); font-size:46px; font-weight:700; margin-top:8px; color:var(--teal); letter-spacing:-0.5px;}
+.hero-value{font-family:var(--font-display); font-size:48px; font-weight:700; margin-top:8px; color:var(--brand-primary); letter-spacing:-0.5px;}
 .hero-sub{display:flex; align-items:center; gap:10px; margin-top:10px; font-size:13px; color:var(--text-dim);}
-.delta{font-family:var(--font-mono); font-weight:600; padding:2px 8px; border-radius:6px; font-size:12px;}
-.delta.up{color:var(--teal); background:rgba(47,217,176,0.12);}
-.delta.down{color:var(--red); background:rgba(242,84,91,0.12);}
+.delta{font-family:var(--font-mono); font-weight:600; padding:3px 10px; border-radius:6px; font-size:12px;}
+.delta.up{color:var(--green); background:rgba(47,217,176,0.14);}
+.delta.down{color:var(--red); background:rgba(242,84,91,0.14);}
 
 .hero-split{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
 .split-card{
-  background:var(--panel); border:1px solid var(--stroke); border-radius:16px; padding:22px 24px; display:flex; flex-direction:column; justify-content:space-between;
+  background:var(--panel); border:1px solid var(--stroke); border-radius:18px; padding:22px 24px; display:flex; flex-direction:column; justify-content:space-between;
 }
 .split-card .hero-label{margin-bottom:8px;}
-.split-card .hero-value{font-size:28px;}
-.split-card.loss .hero-value{color:var(--red);}
+.split-card .hero-value{font-size:30px;}
 
-/* ---------- KPI GRID ---------- */
+/* KPI GRID */
 .kpi-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-bottom:26px;}
-@media (max-width:1000px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} }
-@media (max-width:520px){ .kpi-grid{grid-template-columns:1fr;} }
+@media (max-width:1050px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:550px){ .kpi-grid{grid-template-columns:1fr;} }
 
 .kpi{
-  background:var(--panel); border:1px solid var(--stroke); border-radius:13px; padding:18px 20px;
-  transition:border-color .15s ease, transform .15s ease;
+  background:var(--panel); border:1px solid var(--stroke); border-radius:14px; padding:18px 20px;
+  transition:border-color .2s ease, transform .2s ease;
 }
-.kpi:hover{border-color:var(--stroke-soft); transform:translateY(-2px);}
+.kpi:hover{border-color:var(--brand-primary); transform:translateY(-2px);}
 .kpi-top{display:flex; justify-content:space-between; align-items:flex-start;}
-.kpi-icon{width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px;}
-.kpi .kpi-label{font-size:12px; color:var(--text-dim); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.5px;}
-.kpi .kpi-value{font-family:var(--font-display); font-size:25px; font-weight:600; margin-top:10px;}
+.kpi-icon{width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:15px; background:rgba(255,255,255,0.05);}
+.kpi .kpi-label{font-size:11.5px; color:var(--text-dim); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.5px;}
+.kpi .kpi-value{font-family:var(--font-display); font-size:26px; font-weight:700; margin-top:8px;}
 .kpi .kpi-foot{font-size:11.5px; color:var(--text-faint); margin-top:6px; display:flex; gap:6px; align-items:center;}
 
-/* ---------- PANELS / CHARTS ---------- */
+/* PANELS / CHARTS */
 .grid-2{display:grid; grid-template-columns:1.15fr 1fr; gap:20px; margin-bottom:20px;}
 @media (max-width:980px){ .grid-2{grid-template-columns:1fr;} }
 
-.panel{background:var(--panel); border:1px solid var(--stroke); border-radius:16px; padding:22px 24px;}
+.panel{background:var(--panel); border:1px solid var(--stroke); border-radius:18px; padding:22px 24px;}
 .panel-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:8px;}
-.panel-title{font-family:var(--font-display); font-size:15.5px; font-weight:600;}
+.panel-title{font-family:var(--font-display); font-size:16px; font-weight:700;}
 .panel-desc{font-size:12px; color:var(--text-faint); margin-top:2px;}
 .chart-box{position:relative; height:280px;}
 .chart-box.tall{height:360px;}
 
-/* ---------- FUNNEL ---------- */
-.funnel{display:flex; flex-direction:column; gap:10px; margin-top:6px;}
-.funnel-row{display:grid; grid-template-columns:140px 1fr 90px; align-items:center; gap:14px;}
-.funnel-label{font-size:12.5px; color:var(--text-dim); font-family:var(--font-mono);}
+/* FUNNEL */
+.funnel{display:flex; flex-direction:column; gap:12px; margin-top:6px;}
+.funnel-row{display:grid; grid-template-columns:160px 1fr 90px; align-items:center; gap:14px;}
+.funnel-label{font-size:12px; color:var(--text-dim); font-family:var(--font-mono); line-height:1.3;}
 .funnel-track{height:34px; background:var(--bg-alt); border-radius:8px; overflow:hidden; position:relative; border:1px solid var(--stroke-soft);}
-.funnel-fill{height:100%; border-radius:8px; display:flex; align-items:center; padding-left:12px; font-family:var(--font-mono); font-size:12.5px; font-weight:600; color:#08211B; transition:width 1s cubic-bezier(.2,.8,.2,1);}
-.funnel-value{font-family:var(--font-mono); font-size:13px; text-align:right; color:var(--text-dim);}
-.funnel-drop{font-size:11px; color:var(--text-faint); font-family:var(--font-mono); padding-left:154px; margin-top:-4px;}
+.funnel-fill{height:100%; border-radius:8px; display:flex; align-items:center; padding-left:12px; font-family:var(--font-mono); font-size:12px; font-weight:700; color:#FFFFFF; transition:width 0.8s ease;}
+.funnel-value{font-family:var(--font-mono); font-size:13px; text-align:right; color:var(--text-dim); font-weight:600;}
 
-/* ---------- ALERTS ---------- */
+/* ALERTS & UNITS CARDS */
 .alert-list{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
 .alert-item{
-  display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:10px;
-  background:var(--bg-alt); border:1px solid var(--stroke-soft);
+  display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-radius:12px;
+  background:var(--bg-alt); border:1px solid var(--stroke-soft); transition:border-color 0.15s ease;
 }
-.alert-item .name{font-size:13px; font-weight:500;}
-.alert-item .tag{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-top:2px;}
-.alert-badge{font-family:var(--font-mono); font-size:12.5px; font-weight:700; padding:4px 10px; border-radius:7px;}
-.alert-badge.bad{background:rgba(242,84,91,0.14); color:var(--red);}
-.alert-badge.good{background:rgba(47,217,176,0.14); color:var(--teal);}
-.alert-badge.warn{background:rgba(242,169,59,0.14); color:var(--amber);}
+.alert-item:hover{border-color:var(--stroke);}
+.alert-item .name{font-size:13.5px; font-weight:600;}
+.alert-item .tag{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-top:3px;}
+.alert-badge{font-family:var(--font-mono); font-size:12.5px; font-weight:700; padding:4px 10px; border-radius:8px;}
+.alert-badge.bad{background:rgba(242,84,91,0.16); color:var(--red);}
+.alert-badge.good{background:rgba(47,217,176,0.16); color:var(--green);}
+.alert-badge.warn{background:rgba(242,169,59,0.16); color:var(--amber);}
 
-/* ---------- TABLE ---------- */
-.table-controls{display:flex; gap:10px; align-items:center; margin-bottom:14px; flex-wrap:wrap;}
-.search-box{
-  flex:1; min-width:200px; background:var(--bg-alt); border:1px solid var(--stroke); border-radius:9px;
-  padding:9px 14px; color:var(--text); font-family:var(--font-body); font-size:13px;
+.unit-grid-cards{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; margin-top:10px;
 }
-.search-box:focus{outline:none; border-color:var(--teal-dim);}
+.unit-card{
+  background:var(--bg-alt); border:1px solid var(--stroke-soft); border-radius:14px; padding:16px 18px;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.unit-card:hover{border-color:var(--brand-primary); transform:translateY(-2px);}
+.unit-card-header{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;}
+.unit-card-title{font-size:14px; font-weight:700; font-family:var(--font-display); line-height:1.2;}
+
+.table-controls{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+.search-box{
+  flex:1; min-width:240px; background:var(--bg-alt); border:1px solid var(--stroke); border-radius:10px;
+  padding:10px 16px; color:var(--text); font-family:var(--font-body); font-size:13px;
+}
+.search-box:focus{outline:none; border-color:var(--brand-primary);}
 .search-box::placeholder{color:var(--text-faint);}
 
 table.data{width:100%; border-collapse:collapse; font-size:13px;}
 table.data thead th{
   text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.5px;
-  color:var(--text-faint); padding:10px 12px; border-bottom:1px solid var(--stroke); cursor:pointer; white-space:nowrap;
+  color:var(--text-faint); padding:12px 14px; border-bottom:1px solid var(--stroke); cursor:pointer; white-space:nowrap;
   user-select:none;
 }
-table.data thead th:hover{color:var(--teal);}
-table.data thead th.sorted{color:var(--teal);}
-table.data thead th .arrow{font-size:9px; margin-left:3px; opacity:0.7;}
+table.data thead th:hover{color:var(--brand-primary);}
+table.data thead th.sorted{color:var(--brand-primary);}
+table.data thead th .arrow{font-size:9px; margin-left:4px; opacity:0.8;}
 table.data tbody tr{border-bottom:1px solid var(--stroke-soft); transition:background .12s ease;}
 table.data tbody tr:hover{background:var(--panel-2);}
-table.data td{padding:10px 12px; white-space:nowrap; font-family:var(--font-mono); font-variant-numeric:tabular-nums;}
-table.data td.unit-cell{font-family:var(--font-body); font-weight:500; white-space:normal;}
-.rank-badge{
-  display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:5px;
-  font-size:10.5px; font-weight:700; margin-right:8px; font-family:var(--font-mono);
-  background:var(--stroke-soft); color:var(--text-dim);
-}
-.rank-badge.r1{background:rgba(232,196,104,0.18); color:var(--gold);}
-.rank-badge.r2{background:rgba(154,166,180,0.18); color:#C7D0DA;}
-.rank-badge.r3{background:rgba(217,140,90,0.18); color:#D98C5A;}
+table.data td{padding:12px 14px; white-space:nowrap; font-family:var(--font-mono); font-variant-numeric:tabular-nums;}
+table.data td.unit-cell{font-family:var(--font-body); font-weight:600; white-space:normal;}
 
-.bar-mini{height:6px; border-radius:3px; background:var(--bg-alt); width:70px; display:inline-block; overflow:hidden; vertical-align:middle; margin-right:8px; border:1px solid var(--stroke-soft);}
-.bar-mini-fill{height:100%; border-radius:3px; background:var(--teal);}
+.tag-pill{font-size:10.5px; font-family:var(--font-mono); padding:3px 8px; border-radius:6px; font-weight:700;}
+.tag-pill.ok{background:rgba(47,217,176,0.15); color:var(--green);}
+.tag-pill.warn{background:rgba(242,169,59,0.15); color:var(--amber);}
+.tag-pill.bad{background:rgba(242,84,91,0.15); color:var(--red);}
+.tag-pill.estacio-pill{background:rgba(0,128,255,0.15); color:#38BDF8;}
+.tag-pill.wyden-pill{background:rgba(224,36,112,0.15); color:#F472B6;}
 
-.tag-pill{font-size:10.5px; font-family:var(--font-mono); padding:2px 7px; border-radius:5px; font-weight:600;}
-.tag-pill.ok{background:rgba(47,217,176,0.12); color:var(--teal);}
-.tag-pill.warn{background:rgba(242,169,59,0.14); color:var(--amber);}
-.tag-pill.bad{background:rgba(242,84,91,0.14); color:var(--red);}
-
-footer.foot{margin-top:36px; padding-top:18px; border-top:1px solid var(--stroke-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+footer.foot{margin-top:40px; padding-top:20px; border-top:1px solid var(--stroke-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
 footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-mono);}
 
 @media (max-width:640px){
   .top-row{flex-direction:column;}
-  .hero-value{font-size:34px;}
+  .hero-value{font-size:36px;}
+  .funnel-row{grid-template-columns:1fr; gap:6px;}
 }
 </style>
 </head>
@@ -229,50 +281,50 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
   <div class="wrap">
     <div class="top-row">
       <div class="brand">
-        <div class="brand-mark">★</div>
+        <div class="brand-mark" id="brandMark">★</div>
         <div>
-          <h1>Painel de Pesquisa de Satisfação</h1>
-          <p id="periodTag">ESTÁCIO & WYDEN · SETEMBRO 2026 · 49 RESPOSTAS</p>
+          <h1 id="brandTitle">Painel de Satisfação ATP</h1>
+          <p id="periodTag">CARREGANDO INDICADORES...</p>
         </div>
       </div>
       <div class="period-switch" id="periodSwitch">
-        <button data-period="todos" class="active">Geral (Todas)</button>
-        <button data-period="estacio">Estácio</button>
-        <button data-period="wyden">Wyden</button>
+        <button data-period="todos" class="active">🌐 Visão Geral (Ambas)</button>
+        <button data-period="estacio" class="btn-estacio">🎓 Estácio</button>
+        <button data-period="wyden" class="btn-wyden">🏛️ Wyden</button>
       </div>
     </div>
     <nav class="tabs" id="tabs">
-      <button data-view="visao" class="active">Visão Geral</button>
-      <button data-view="unidades">Unidades & Marcas</button>
-      <button data-view="tabela">Tabela Detalhada</button>
+      <button data-view="visao" class="active">📊 Visão Geral & KPIs</button>
+      <button data-view="unidades">🏢 Análise por Unidade (18 Campus)</button>
+      <button data-view="tabela">📋 Tabela Completa (Respostas)</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
 
-  <!-- ================= VISÃO GERAL ================= -->
+  <!-- ================= VISÃO GERAL & KPIS ================= -->
   <section class="view active" id="view-visao">
 
     <div class="hero">
       <div class="hero-card">
         <div class="hero-label">Nota Média de Satisfação (CSAT)</div>
-        <div class="hero-value" id="heroRecuperado">4.88 / 5.0</div>
+        <div class="hero-value" id="heroCSAT">4.88 / 5.0</div>
         <div class="hero-sub">
-          <span class="delta up" id="heroDelta">93.9% Nota Máxima</span>
-          <span id="heroDeltaText">46 de 49 alunos avaliaram com nota 5</span>
+          <span class="delta up" id="heroDelta">93.9% Nota 5</span>
+          <span id="heroCSATSub">46 de 49 alunos avaliaram com nota máxima</span>
         </div>
       </div>
       <div class="hero-split">
         <div class="split-card">
           <div class="hero-label">NPS Score (Net Promoter)</div>
-          <div class="hero-value" id="heroPromessa" style="color:var(--teal);">+91.8</div>
-          <div class="hero-sub" style="margin-top:6px;" id="heroPromessaSub">Zona de Excelência (46 Promotores, 2 Neutros, 1 Detrator)</div>
+          <div class="hero-value" id="heroNPS" style="color:var(--brand-primary);">+91.8</div>
+          <div class="hero-sub" style="margin-top:6px;" id="heroNPSSub">Zona de Excelência (46 Promotores, 2 Neutros, 1 Detrator)</div>
         </div>
-        <div class="split-card loss">
-          <div class="hero-label">Atendimento Presencial / WhatsApp</div>
-          <div class="hero-value" id="heroQuebrado" style="color:var(--gold);">93.9%</div>
-          <div class="hero-sub" style="margin-top:6px;" id="heroQuebradoPct">46 alunos optaram pelo canal direto na unidade</div>
+        <div class="split-card">
+          <div class="hero-label">Preferência Humana / Presencial</div>
+          <div class="hero-value" id="heroPref" style="color:var(--brand-secondary);">93.9%</div>
+          <div class="hero-sub" style="margin-top:6px;" id="heroPrefSub">46 alunos optaram por WhatsApp/Atendimento Presencial</div>
         </div>
       </div>
     </div>
@@ -281,34 +333,34 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
       <div class="kpi">
         <div class="kpi-top">
           <span class="kpi-label">Total Respostas</span>
-          <div class="kpi-icon" style="background:rgba(91,159,232,0.14); color:var(--blue);">◎</div>
+          <div class="kpi-icon">◎</div>
         </div>
-        <div class="kpi-value" id="kpiAcionado">49</div>
-        <div class="kpi-foot" id="kpiAcionadoFoot">35 Estácio · 14 Wyden</div>
+        <div class="kpi-value" id="kpiTotal">49</div>
+        <div class="kpi-foot" id="kpiTotalFoot">35 Estácio · 14 Wyden</div>
       </div>
       <div class="kpi">
         <div class="kpi-top">
           <span class="kpi-label">Direcionado Nosso Canal</span>
-          <div class="kpi-icon" style="background:rgba(232,196,104,0.14); color:var(--gold);">◐</div>
+          <div class="kpi-icon">◐</div>
         </div>
-        <div class="kpi-value" id="kpiNegociado">29</div>
-        <div class="kpi-foot" id="kpiNegociadoFoot">59.2% receberam cobrança ativa</div>
+        <div class="kpi-value" id="kpiNossoCanal">29</div>
+        <div class="kpi-foot" id="kpiNossoCanalFoot">59.2% receberam cobrança ativa</div>
       </div>
       <div class="kpi">
         <div class="kpi-top">
-          <span class="kpi-label">Canal Externo / Outro</span>
-          <div class="kpi-icon" style="background:rgba(242,84,91,0.14); color:var(--red);">⚡</div>
+          <span class="kpi-label">Canal Externo / Terceiros</span>
+          <div class="kpi-icon">⚡</div>
         </div>
-        <div class="kpi-value" id="kpiPago">12</div>
-        <div class="kpi-foot" id="kpiPagoFoot">24.5% contatados por outros canais</div>
+        <div class="kpi-value" id="kpiOutroCanal">12</div>
+        <div class="kpi-foot" id="kpiOutroCanalFoot">24.5% contatados por terceiros</div>
       </div>
       <div class="kpi">
         <div class="kpi-top">
-          <span class="kpi-label">Média Wyden</span>
-          <div class="kpi-icon" style="background:rgba(242,169,59,0.14); color:var(--amber); font-weight:bold;">W</div>
+          <span class="kpi-label">Total Unidades</span>
+          <div class="kpi-icon">🏛️</div>
         </div>
-        <div class="kpi-value" id="kpiTicket">4.64</div>
-        <div class="kpi-foot">Estácio: 4.97 de média</div>
+        <div class="kpi-value" id="kpiUnidadesCount">18</div>
+        <div class="kpi-foot" id="kpiUnidadesFoot">16 Estácio · 2 Wyden</div>
       </div>
     </div>
 
@@ -317,7 +369,7 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
         <div class="panel-head">
           <div>
             <div class="panel-title">Motivos de Escolha do Canal de Atendimento</div>
-            <div class="panel-desc">O que levou os alunos a buscarem o canal ATP presencial/unidade</div>
+            <div class="panel-desc">Fatores decisivos citados pelos alunos na pesquisa</div>
           </div>
         </div>
         <div class="funnel" id="funnelBox"></div>
@@ -326,7 +378,7 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
       <div class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-title">Distribuição das Notas de Avaliação</div>
+            <div class="panel-title">Distribuição do CSAT (Notas 1 a 5)</div>
             <div class="panel-desc">Grau de satisfação dos alunos atendidos</div>
           </div>
         </div>
@@ -338,8 +390,8 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
       <div class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-title">Top Unidades por Volume de Pesquisas</div>
-            <div class="panel-desc" id="topUnitsDesc">Unidades com maior engajamento na resposta</div>
+            <div class="panel-title">Top Unidades por Volume de Participação</div>
+            <div class="panel-desc">Campus com maior engajamento na resposta da pesquisa</div>
           </div>
         </div>
         <div class="chart-box tall"><canvas id="chartTopUnits"></canvas></div>
@@ -348,8 +400,8 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
       <div class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-title">Destaques e Origem do Contato</div>
-            <div class="panel-desc">Anotações e percepção por unidade de atendimento</div>
+            <div class="panel-title">Destaques e Percepção dos Canais</div>
+            <div class="panel-desc">Resumo da origem do contato e percepções dos alunos</div>
           </div>
         </div>
         <div class="alert-list" id="alertList"></div>
@@ -358,73 +410,54 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
 
   </section>
 
-  <!-- ================= UNIDADES & MARCAS ================= -->
+  <!-- ================= ANÁLISE POR UNIDADE ================= -->
   <section class="view" id="view-unidades">
-    <div class="eyebrow">Análise por Instituição</div>
-    <div class="panel" style="margin-bottom:20px;">
+    <div class="eyebrow">Visualização Detalhada por Campus / Unidade</div>
+    
+    <div class="panel" style="margin-bottom:22px;">
       <div class="panel-head">
         <div>
-          <div class="panel-title">Estácio vs Wyden — Volume e Nota Média</div>
-          <div class="panel-desc">Comparativo de desempenho entre as duas redes de ensino</div>
+          <div class="panel-title" id="unitChartTitle">Desempenho de CSAT e Respostas por Unidade</div>
+          <div class="panel-desc">Comparativo de avaliação e engajamento em cada campus</div>
         </div>
       </div>
-      <div class="chart-box tall"><canvas id="chartTrend"></canvas></div>
+      <div class="chart-box tall" style="height:420px;"><canvas id="chartUnitComp"></canvas></div>
     </div>
 
-    <div class="grid-2">
-      <div class="panel">
-        <div class="panel-head">
-          <div>
-            <div class="panel-title">Direcionamento de Cobrança</div>
-            <div class="panel-desc">Alunos direcionados ao nosso canal vs outros canais</div>
-          </div>
-        </div>
-        <div id="risersBox" class="alert-list"></div>
-      </div>
-      <div class="panel">
-        <div class="panel-head">
-          <div>
-            <div class="panel-title">Pontos de Destaque</div>
-            <div class="panel-desc">Unidades com destaques de nota e engajamento</div>
-          </div>
-        </div>
-        <div id="fallersBox" class="alert-list"></div>
-      </div>
-    </div>
-
-    <div class="panel" style="margin-top:20px;">
+    <div class="panel">
       <div class="panel-head">
         <div>
-          <div class="panel-title">Média de Avaliação por Unidade</div>
-          <div class="panel-desc">Desempenho comparativo de satisfação por campus</div>
+          <div class="panel-title">Cartões Individuais de Cada Unidade</div>
+          <div class="panel-desc">Resumo de indicadores unitários (Respostas, CSAT Média, % Cobrança Direta)</div>
         </div>
       </div>
-      <div class="chart-box tall" style="height:460px;"><canvas id="chartConversion"></canvas></div>
+      <div class="unit-grid-cards" id="unitGridCards"></div>
     </div>
   </section>
 
-  <!-- ================= TABELA ================= -->
+  <!-- ================= TABELA COMPLETA ================= -->
   <section class="view" id="view-tabela">
     <div class="panel">
       <div class="panel-head">
         <div>
-          <div class="panel-title">Detalhamento por Resposta (Alunos)</div>
-          <div class="panel-desc">Clique nos cabeçalhos para ordenar as respostas</div>
+          <div class="panel-title">Registro Detalhado de Respostas</div>
+          <div class="panel-desc">Pesquise por unidade, marca ou motivo e ordene pelos cabeçalhos</div>
         </div>
       </div>
       <div class="table-controls">
-        <input type="text" class="search-box" id="searchBox" placeholder="Buscar por unidade, marca ou motivo...">
+        <input type="text" class="search-box" id="searchBox" placeholder="🔍 Buscar por unidade, marca, matrícula ou motivo...">
       </div>
       <div style="overflow-x:auto;">
         <table class="data" id="dataTable">
           <thead>
             <tr>
-              <th data-key="unidade">Unidade</th>
+              <th data-key="unidade">Unidade / Campus</th>
               <th data-key="fonte">Marca</th>
-              <th data-key="avaliacao">Nota</th>
+              <th data-key="avaliacao">Nota CSAT</th>
               <th data-key="nosso_canal">Atendido Nosso Canal</th>
               <th data-key="outro_canal">Recebeu Outro Canal</th>
-              <th data-key="motivo">Motivo da Opção</th>
+              <th data-key="motivo">Motivo da Escolha</th>
+              <th data-key="matricula">Matrícula</th>
               <th data-key="timestamp">Data/Hora</th>
             </tr>
           </thead>
@@ -438,123 +471,147 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
 
 <div class="wrap">
   <footer class="foot">
-    <p>PAINEL DE PESQUISA DE SATISFAÇÃO · DADOS: PESQUISA DE SATISFAÇÃO ATP ESTÁCIO & WYDEN.XLSX</p>
-    <p id="footUpdated">GERADO EM 25/09/2026</p>
+    <p>PAINEL INTERATIVO ATP — ESTÁCIO & WYDEN · RECURSOS HUMANOS E RECUPERAÇÃO DE CRÉDITO 2026</p>
+    <p id="footUpdated">DADOS ATUALIZADOS EM SETEMBRO/2026</p>
   </footer>
 </div>
 
 <script>
-const DATA = {"totais": {"total_respostas": 49, "media_avaliacao": 4.88, "pct_csat_5": 93.9, "nps_score": 91.8, "promotores": 46, "neutros": 2, "detratores": 1, "estacio_count": 35, "wyden_count": 14, "estacio_media": 4.97, "wyden_media": 4.64, "nosso_canal_sim": 29, "nosso_canal_nao": 20, "outro_canal_sim": 12, "outro_canal_nao": 37}, "unidades": [{"unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "fonte": "Wyden", "total": 10, "media": 4.5, "nota5": 8, "nosso_canal_sim": 9, "outro_canal_sim": 5}, {"unidade": "SÃO LUÍS - MA", "fonte": "Estácio", "total": 5, "media": 5.0, "nota5": 5, "nosso_canal_sim": 2, "outro_canal_sim": 0}, {"unidade": "BELÉM - PA", "fonte": "Estácio", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "UNIFACID (WYDEN) TERESINA - PI", "fonte": "Wyden", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 3, "outro_canal_sim": 1}, {"unidade": "ARACAJU - SE", "fonte": "Estácio", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "ESTÁCIO - ABDIAS DE CARVALHO - PE", "fonte": "Estácio", "total": 3, "media": 5.0, "nota5": 3, "nosso_canal_sim": 2, "outro_canal_sim": 0}, {"unidade": "CABO FRIO - RJ", "fonte": "Estácio", "total": 3, "media": 5.0, "nota5": 3, "nosso_canal_sim": 2, "outro_canal_sim": 0}, {"unidade": "FORTALEZA - CE", "fonte": "Estácio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "JATIÚCA - AL", "fonte": "Estácio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "NITERÓI - RJ", "fonte": "Estácio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 1, "outro_canal_sim": 1}, {"unidade": "SANTA CRUZ - RJ", "fonte": "Estácio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "TERESINA - PI", "fonte": "Estácio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "MACAPÁ - AP", "fonte": "Estácio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "MANAUS - AM", "fonte": "Estácio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "R9 TAQUARA - RJ", "fonte": "Estácio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 1, "outro_canal_sim": 0}, {"unidade": "ESTAÇÃO - GO", "fonte": "Estácio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "TOM JOBIM - RIO DE JANEIRO - RJ", "fonte": "Estácio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "MARACANÃ - RJ", "fonte": "Estácio", "total": 1, "media": 4.0, "nota5": 0, "nosso_canal_sim": 1, "outro_canal_sim": 1}], "motivos": [{"motivo_completo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "motivo_curto": "WhatsApp / Atendimento de Confiança Presencial", "quantidade": 31}, {"motivo_completo": "Ser atendido(a) presencialmente na unidade/campus", "motivo_curto": "Atendimento Presencial na Unidade / Campus", "quantidade": 15}, {"motivo_completo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "motivo_curto": "Procurou atendimento sem escolher canal específico", "quantidade": 2}, {"motivo_completo": "Negociar com a colaboradora Eduarda Barreto, que demonstrou competência e profissionalismo ao compreender as necessidades do cliente e buscar a melhor condição possível para atendê-lo, conciliando os interesses da empresa com uma solução satisfatória para ambas as partes. Sua atuação evidenciou habilidades de comunicação, análise e tomada de decisão, contribuindo para um atendimento mais eficiente e humanizado. Pessoas como a Eduarda , merecem reconhecimento e valorização.", "motivo_curto": "Elogio Específico ao Atendente (Eduarda Barreto)", "quantidade": 1}], "respostas": [{"timestamp": "2026-09-18 16:45:57.395000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-18 16:57:44.643000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-18 17:10:05.485000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-18 18:58:04.819000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 4, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-21 11:32:22.376000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-21 13:36:45.824000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "Medicine veterinary "}, {"timestamp": "2026-09-21 20:51:55.299000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-22 16:16:36.015000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-22 18:51:19.558000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "202604068165"}, {"timestamp": "2026-09-23 13:34:54.589000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 1, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-23 15:01:19.614000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-23 16:09:28.645000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-23 17:38:36.566000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-23 20:17:12.515000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-18 16:21:16.426000", "fonte": "Estácio", "unidade": "TOM JOBIM - RIO DE JANEIRO - RJ", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202023232323"}, {"timestamp": "2026-09-18 16:40:08.163000", "fonte": "Estácio", "unidade": "BELÉM - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-18 16:43:55.474000", "fonte": "Estácio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202202574431"}, {"timestamp": "2026-09-18 17:19:04.943000", "fonte": "Estácio", "unidade": "CABO FRIO - RJ", "avaliacao": 5, "motivo": "Negociar com a colaboradora Eduarda Barreto, que demonstrou competência e profissionalismo ao compreender as necessidades do cliente e buscar a melhor condição possível para atendê-lo, conciliando os interesses da empresa com uma solução satisfatória para ambas as partes. Sua atuação evidenciou habilidades de comunicação, análise e tomada de decisão, contribuindo para um atendimento mais eficiente e humanizado. Pessoas como a Eduarda , merecem reconhecimento e valorização.", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "202008240557"}, {"timestamp": "2026-09-18 17:28:31.305000", "fonte": "Estácio", "unidade": "ESTÁCIO - ABDIAS DE CARVALHO - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-18 18:03:51.996000", "fonte": "Estácio", "unidade": "SANTA CRUZ - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-18 20:05:35.168000", "fonte": "Estácio", "unidade": "SANTA CRUZ - RJ", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-21 10:28:16.956000", "fonte": "Estácio", "unidade": "FORTALEZA - CE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202309580391"}, {"timestamp": "2026-09-21 10:30:04.353000", "fonte": "Estácio", "unidade": "ESTAÇÃO - GO", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202107362121"}, {"timestamp": "2026-09-21 12:59:14.422000", "fonte": "Estácio", "unidade": "BELÉM - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202203813323"}, {"timestamp": "2026-09-21 12:59:23.064000", "fonte": "Estácio", "unidade": "BELÉM - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-21 15:52:29.296000", "fonte": "Estácio", "unidade": "BELÉM - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "Jogos digitais"}, {"timestamp": "2026-09-21 15:54:44.138000", "fonte": "Estácio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-21 16:47:21.523000", "fonte": "Estácio", "unidade": "TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-21 18:30:56.391000", "fonte": "Estácio", "unidade": "CABO FRIO - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-21 20:10:45.044000", "fonte": "Estácio", "unidade": "ESTÁCIO - ABDIAS DE CARVALHO - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "202408616031"}, {"timestamp": "2026-09-22 06:04:42.145000", "fonte": "Estácio", "unidade": "TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-22 10:04:25.052000", "fonte": "Estácio", "unidade": "SÃO LUÍS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-22 10:20:10.729000", "fonte": "Estácio", "unidade": "ESTÁCIO - ABDIAS DE CARVALHO - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-22 10:26:07.138000", "fonte": "Estácio", "unidade": "SÃO LUÍS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-22 11:32:26.349000", "fonte": "Estácio", "unidade": "SÃO LUÍS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202503217815"}, {"timestamp": "2026-09-22 11:44:04.156000", "fonte": "Estácio", "unidade": "SÃO LUÍS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "201402456328"}, {"timestamp": "2026-09-22 14:30:32.174000", "fonte": "Estácio", "unidade": "R9 TAQUARA - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-22 17:04:53.659000", "fonte": "Estácio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202202960381"}, {"timestamp": "2026-09-23 11:29:31.106000", "fonte": "Estácio", "unidade": "NITERÓI - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-23 11:36:56.569000", "fonte": "Estácio", "unidade": "JATIÚCA - AL", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-23 13:14:40.765000", "fonte": "Estácio", "unidade": "MANAUS - AM", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202008111171"}, {"timestamp": "2026-09-23 16:23:26.572000", "fonte": "Estácio", "unidade": "MACAPÁ - AP", "avaliacao": 5, "motivo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "Enfermagem "}, {"timestamp": "2026-09-23 17:19:57.945000", "fonte": "Estácio", "unidade": "NITERÓI - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-23 17:28:20.656000", "fonte": "Estácio", "unidade": "CABO FRIO - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-24 13:43:01.211000", "fonte": "Estácio", "unidade": "MARACANÃ - RJ", "avaliacao": 4, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202344031928"}, {"timestamp": "2026-09-24 14:59:52.944000", "fonte": "Estácio", "unidade": "JATIÚCA - AL", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-24 16:06:28.467000", "fonte": "Estácio", "unidade": "FORTALEZA - CE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""}, {"timestamp": "2026-09-24 17:29:28.356000", "fonte": "Estácio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202301005426"}, {"timestamp": "2026-09-25 10:58:32.623000", "fonte": "Estácio", "unidade": "SÃO LUÍS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""}]};
+const RAW_DATA = {"totais": {"geral": {"respostas": 49, "media": 4.88, "csat5_pct": 93.9, "nps": 91.8, "promotores": 46, "neutros": 2, "detratores": 1, "nosso_canal": 29, "nosso_canal_pct": 59.2, "outro_canal": 12, "outro_canal_pct": 24.5, "unidades_qtd": 18}, "estacio": {"respostas": 35, "media": 4.97, "csat5_pct": 97.1, "nps": 97.1, "promotores": 34, "neutros": 1, "detratores": 0, "nosso_canal": 17, "nosso_canal_pct": 48.6, "outro_canal": 6, "outro_canal_pct": 17.1, "unidades_qtd": 16}, "wyden": {"respostas": 14, "media": 4.64, "csat5_pct": 85.7, "nps": 78.6, "promotores": 12, "neutros": 1, "detratores": 1, "nosso_canal": 12, "nosso_canal_pct": 85.7, "outro_canal": 6, "outro_canal_pct": 42.9, "unidades_qtd": 2}}, "unidades": [{"unidade": "ARACAJU - SE", "fonte": "Est\u00e1cio", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "BEL\u00c9M - PA", "fonte": "Est\u00e1cio", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "CABO FRIO - RJ", "fonte": "Est\u00e1cio", "total": 3, "media": 5.0, "nota5": 3, "nosso_canal_sim": 2, "outro_canal_sim": 0}, {"unidade": "ESTA\u00c7\u00c3O - GO", "fonte": "Est\u00e1cio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "EST\u00c1CIO - ABDIAS DE CARVALHO - PE", "fonte": "Est\u00e1cio", "total": 3, "media": 5.0, "nota5": 3, "nosso_canal_sim": 2, "outro_canal_sim": 0}, {"unidade": "FORTALEZA - CE", "fonte": "Est\u00e1cio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "JATI\u00daCA - AL", "fonte": "Est\u00e1cio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "MACAP\u00c1 - AP", "fonte": "Est\u00e1cio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "MANAUS - AM", "fonte": "Est\u00e1cio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "MARACAN\u00c3 - RJ", "fonte": "Est\u00e1cio", "total": 1, "media": 4.0, "nota5": 0, "nosso_canal_sim": 1, "outro_canal_sim": 1}, {"unidade": "NITER\u00d3I - RJ", "fonte": "Est\u00e1cio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 1, "outro_canal_sim": 1}, {"unidade": "R9 TAQUARA - RJ", "fonte": "Est\u00e1cio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 1, "outro_canal_sim": 0}, {"unidade": "SANTA CRUZ - RJ", "fonte": "Est\u00e1cio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "S\u00c3O LU\u00cdS - MA", "fonte": "Est\u00e1cio", "total": 5, "media": 5.0, "nota5": 5, "nosso_canal_sim": 2, "outro_canal_sim": 0}, {"unidade": "TERESINA - PI", "fonte": "Est\u00e1cio", "total": 2, "media": 5.0, "nota5": 2, "nosso_canal_sim": 2, "outro_canal_sim": 1}, {"unidade": "TOM JOBIM - RIO DE JANEIRO - RJ", "fonte": "Est\u00e1cio", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 0, "outro_canal_sim": 0}, {"unidade": "UNIFACID (WYDEN) TERESINA - PI", "fonte": "Wyden", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 3, "outro_canal_sim": 1}, {"unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "fonte": "Wyden", "total": 10, "media": 4.5, "nota5": 8, "nosso_canal_sim": 9, "outro_canal_sim": 5}], "respostas": [{"timestamp": "2026-09-18 16:21:16.426000", "fonte": "Est\u00e1cio", "unidade": "TOM JOBIM - RIO DE JANEIRO - RJ", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202023232323"}, {"timestamp": "2026-09-18 16:40:08.163000", "fonte": "Est\u00e1cio", "unidade": "BEL\u00c9M - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-18 16:43:55.474000", "fonte": "Est\u00e1cio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202202574431"}, {"timestamp": "2026-09-18 17:19:04.943000", "fonte": "Est\u00e1cio", "unidade": "CABO FRIO - RJ", "avaliacao": 5, "motivo": "Negociar com a colaboradora Eduarda Barreto, que demonstrou compet\u00eancia e profissionalismo ao compreender as necessidades do cliente e buscar a melhor condi\u00e7\u00e3o poss\u00edvel para atend\u00ea-lo, conciliando os interesses da empresa com uma solu\u00e7\u00e3o satisfat\u00f3ria para ambas as partes. Sua atua\u00e7\u00e3o evidenciou habilidades de comunica\u00e7\u00e3o, an\u00e1lise e tomada de decis\u00e3o, contribuindo para um atendimento mais eficiente e humanizado. Pessoas como a Eduarda , merecem reconhecimento e valoriza\u00e7\u00e3o.", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": "202008240557"}, {"timestamp": "2026-09-18 17:28:31.305000", "fonte": "Est\u00e1cio", "unidade": "EST\u00c1CIO - ABDIAS DE CARVALHO - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-18 18:03:51.996000", "fonte": "Est\u00e1cio", "unidade": "SANTA CRUZ - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-18 20:05:35.168000", "fonte": "Est\u00e1cio", "unidade": "SANTA CRUZ - RJ", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-21 10:28:16.956000", "fonte": "Est\u00e1cio", "unidade": "FORTALEZA - CE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202309580391"}, {"timestamp": "2026-09-21 10:30:04.353000", "fonte": "Est\u00e1cio", "unidade": "ESTA\u00c7\u00c3O - GO", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202107362121"}, {"timestamp": "2026-09-21 12:59:14.422000", "fonte": "Est\u00e1cio", "unidade": "BEL\u00c9M - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202203813323"}, {"timestamp": "2026-09-21 12:59:23.064000", "fonte": "Est\u00e1cio", "unidade": "BEL\u00c9M - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-21 15:52:29.296000", "fonte": "Est\u00e1cio", "unidade": "BEL\u00c9M - PA", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": "Jogos digitais"}, {"timestamp": "2026-09-21 15:54:44.138000", "fonte": "Est\u00e1cio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-21 16:47:21.523000", "fonte": "Est\u00e1cio", "unidade": "TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-21 18:30:56.391000", "fonte": "Est\u00e1cio", "unidade": "CABO FRIO - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-21 20:10:45.044000", "fonte": "Est\u00e1cio", "unidade": "EST\u00c1CIO - ABDIAS DE CARVALHO - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": "202408616031"}, {"timestamp": "2026-09-22 06:04:42.145000", "fonte": "Est\u00e1cio", "unidade": "TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-22 10:04:25.052000", "fonte": "Est\u00e1cio", "unidade": "S\u00c3O LU\u00cdS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-22 10:20:10.729000", "fonte": "Est\u00e1cio", "unidade": "EST\u00c1CIO - ABDIAS DE CARVALHO - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-22 10:26:07.138000", "fonte": "Est\u00e1cio", "unidade": "S\u00c3O LU\u00cdS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-22 11:32:26.349000", "fonte": "Est\u00e1cio", "unidade": "S\u00c3O LU\u00cdS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202503217815"}, {"timestamp": "2026-09-22 11:44:04.156000", "fonte": "Est\u00e1cio", "unidade": "S\u00c3O LU\u00cdS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "201402456328"}, {"timestamp": "2026-09-22 14:30:32.174000", "fonte": "Est\u00e1cio", "unidade": "R9 TAQUARA - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-22 17:04:53.659000", "fonte": "Est\u00e1cio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202202960381"}, {"timestamp": "2026-09-23 11:29:31.106000", "fonte": "Est\u00e1cio", "unidade": "NITER\u00d3I - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-23 11:36:56.569000", "fonte": "Est\u00e1cio", "unidade": "JATI\u00daCA - AL", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-23 13:14:40.765000", "fonte": "Est\u00e1cio", "unidade": "MANAUS - AM", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "202008111171"}, {"timestamp": "2026-09-23 16:23:26.572000", "fonte": "Est\u00e1cio", "unidade": "MACAP\u00c1 - AP", "avaliacao": 5, "motivo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": "Enfermagem "}, {"timestamp": "2026-09-23 17:19:57.945000", "fonte": "Est\u00e1cio", "unidade": "NITER\u00d3I - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-23 17:28:20.656000", "fonte": "Est\u00e1cio", "unidade": "CABO FRIO - RJ", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-24 13:43:01.211000", "fonte": "Est\u00e1cio", "unidade": "MARACAN\u00c3 - RJ", "avaliacao": 4, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202344031928"}, {"timestamp": "2026-09-24 14:59:52.944000", "fonte": "Est\u00e1cio", "unidade": "JATI\u00daCA - AL", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-24 16:06:28.467000", "fonte": "Est\u00e1cio", "unidade": "FORTALEZA - CE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-24 17:29:28.356000", "fonte": "Est\u00e1cio", "unidade": "ARACAJU - SE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202301005426"}, {"timestamp": "2026-09-25 10:58:32.623000", "fonte": "Est\u00e1cio", "unidade": "S\u00c3O LU\u00cdS - MA", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-18 16:45:57.395000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-18 16:57:44.643000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-18 17:10:05.485000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-18 18:58:04.819000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 4, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-21 11:32:22.376000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-21 13:36:45.824000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": "Medicine veterinary "}, {"timestamp": "2026-09-21 20:51:55.299000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-22 16:16:36.015000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-22 18:51:19.558000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": "202604068165"}, {"timestamp": "2026-09-23 13:34:54.589000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 1, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-23 15:01:19.614000", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-23 16:09:28.645000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "N\u00e3o", "outro_canal": "N\u00e3o", "matricula": ""}, {"timestamp": "2026-09-23 17:38:36.566000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alg\u00e9m de confian\u00e7a, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""}, {"timestamp": "2026-09-23 20:17:12.515000", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "nosso_canal": "Sim", "outro_canal": "N\u00e3o", "matricula": ""}]};
 
-const fmtInt = (v) => v.toLocaleString('pt-BR');
-const fmtPct = (v) => v.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
-
-let currentFilter = 'todos';
+let currentBrand = 'todos';
 let sortKey = 'avaliacao';
 let sortDir = -1;
 let charts = {};
 
-function filterDataset(filter) {
-  if (filter === 'todos') return DATA.respostas;
-  if (filter === 'estacio') return DATA.respostas.filter(r => r.fonte === 'Estácio');
-  if (filter === 'wyden') return DATA.respostas.filter(r => r.fonte === 'Wyden');
-  return DATA.respostas;
+function applyTheme(brand) {
+  const body = document.body;
+  body.classList.remove('theme-estacio', 'theme-wyden');
+  
+  const brandMark = document.getElementById('brandMark');
+  const brandTitle = document.getElementById('brandTitle');
+  
+  if (brand === 'estacio') {
+    body.classList.add('theme-estacio');
+    brandMark.textContent = '🎓';
+    brandTitle.textContent = 'Painel de Satisfação ATP — Estácio';
+  } else if (brand === 'wyden') {
+    body.classList.add('theme-wyden');
+    brandMark.textContent = '🏛️';
+    brandTitle.textContent = 'Painel de Satisfação ATP — Wyden';
+  } else {
+    brandMark.textContent = '★';
+    brandTitle.textContent = 'Painel de Satisfação ATP — Estácio & Wyden';
+  }
 }
 
-function filterUnits(filter) {
-  if (filter === 'todos') return DATA.unidades;
-  if (filter === 'estacio') return DATA.unidades.filter(u => u.fonte === 'Estácio');
-  if (filter === 'wyden') return DATA.unidades.filter(u => u.fonte === 'Wyden');
-  return DATA.unidades;
+function getFilteredData(brand) {
+  if (brand === 'estacio') {
+    return {
+      totais: RAW_DATA.totais.estacio,
+      unidades: RAW_DATA.unidades.filter(u => u.fonte === 'Estácio'),
+      respostas: RAW_DATA.respostas.filter(r => r.fonte === 'Estácio')
+    };
+  } else if (brand === 'wyden') {
+    return {
+      totais: RAW_DATA.totais.wyden,
+      unidades: RAW_DATA.unidades.filter(u => u.fonte === 'Wyden'),
+      respostas: RAW_DATA.respostas.filter(r => r.fonte === 'Wyden')
+    };
+  } else {
+    return {
+      totais: RAW_DATA.totais.geral,
+      unidades: RAW_DATA.unidades,
+      respostas: RAW_DATA.respostas
+    };
+  }
 }
 
-// ---------- HERO & KPIS ----------
-function renderHero(filter) {
-  const resp = filterDataset(filter);
-  const total = resp.length;
-  const nota5 = resp.filter(r => r.avaliacao === 5).length;
-  const nota4 = resp.filter(r => r.avaliacao === 4).length;
-  const notaBaixo = resp.filter(r => r.avaliacao <= 3).length;
-  const media = (resp.reduce((acc, r) => acc + r.avaliacao, 0) / (total || 1)).toFixed(2);
-  const nps = (((nota5 - notaBaixo) / (total || 1)) * 100).toFixed(1);
-  const pct5 = (((nota5) / (total || 1)) * 100).toFixed(1);
+function renderDashboard(brand) {
+  applyTheme(brand);
+  const data = getFilteredData(brand);
+  const t = data.totais;
 
-  const nossoSim = resp.filter(r => r.nosso_canal === 'Sim').length;
-  const outroSim = resp.filter(r => r.outro_canal === 'Sim').length;
-
-  document.getElementById('heroRecuperado').textContent = media + ' / 5.0';
-  document.getElementById('heroDelta').textContent = pct5 + '% Nota 5';
-  document.getElementById('heroDeltaText').textContent = nota5 + ' de ' + total + ' respostas com nota máxima';
-
-  document.getElementById('heroPromessa').textContent = (nps > 0 ? '+' : '') + nps;
-  document.getElementById('heroPromessaSub').textContent = 'Zona de Excelência (' + nota5 + ' Promotores, ' + nota4 + ' Neutros, ' + notaBaixo + ' Detrator)';
-
-  const prefPresencial = resp.filter(r => r.motivo.includes('presencialmente') || r.motivo.includes('WhatsApp')).length;
-  const pctPref = ((prefPresencial / (total || 1)) * 100).toFixed(1);
-  document.getElementById('heroQuebrado').textContent = pctPref + '%';
-  document.getElementById('heroQuebradoPct').textContent = prefPresencial + ' alunos preferem WhatsApp/Presencial na Unidade';
-
-  document.getElementById('kpiAcionado').textContent = total;
-  const estacioCount = resp.filter(r => r.fonte === 'Estácio').length;
-  const wydenCount = resp.filter(r => r.fonte === 'Wyden').length;
-  document.getElementById('kpiAcionadoFoot').textContent = estacioCount + ' Estácio · ' + wydenCount + ' Wyden';
-
-  document.getElementById('kpiNegociado').textContent = nossoSim;
-  document.getElementById('kpiNegociadoFoot').textContent = ((nossoSim / (total || 1)) * 100).toFixed(1) + '% direcionados por cobrança nossa';
-
-  document.getElementById('kpiPago').textContent = outroSim;
-  document.getElementById('kpiPagoFoot').textContent = ((outroSim / (total || 1)) * 100).toFixed(1) + '% receberam cobrança por outros canais';
-
-  const estacioAvg = (DATA.respostas.filter(r=>r.fonte==='Estácio').reduce((a,b)=>a+b.avaliacao,0)/35).toFixed(2);
-  const wydenAvg = (DATA.respostas.filter(r=>r.fonte==='Wyden').reduce((a,b)=>a+b.avaliacao,0)/14).toFixed(2);
-  document.getElementById('kpiTicket').textContent = filter==='wyden' ? wydenAvg : (filter==='estacio' ? estacioAvg : wydenAvg);
-  document.getElementById('kpiTicketFoot').textContent = 'Estácio: ' + estacioAvg + ' · Wyden: ' + wydenAvg;
-
-  const uCount = filterUnits(filter).length;
   document.getElementById('periodTag').textContent =
-    (filter==='todos' ? 'ESTÁCIO & WYDEN' : filter.toUpperCase()) +
-    ' · SETEMBRO 2026 · ' + total + ' RESPOSTAS (' + uCount + ' UNIDADES)';
+    (brand === 'todos' ? 'VISÃO CONSOLIDADA (AMBAS AS MARCAS)' : (brand === 'estacio' ? 'MARCA ESTÁCIO (16 CAMPUS)' : 'MARCA WYDEN (2 CAMPUS)')) +
+    ' · SETEMBRO 2026 · ' + t.respostas + ' RESPOSTAS';
+
+  document.getElementById('heroCSAT').textContent = t.media.toFixed(2) + ' / 5.0';
+  document.getElementById('heroDelta').textContent = t.csat5_pct.toFixed(1) + '% Nota 5';
+  document.getElementById('heroCSATSub').textContent = t.promotores + ' de ' + t.respostas + ' respostas com nota máxima 5';
+
+  document.getElementById('heroNPS').textContent = (t.nps > 0 ? '+' : '') + t.nps.toFixed(1);
+  document.getElementById('heroNPSSub').textContent = 'Promotores: ' + t.promotores + ' | Neutros: ' + t.neutros + ' | Detratores: ' + t.detratores;
+
+  const humPrefCount = data.respostas.filter(r => r.motivo.includes('presencialmente') || r.motivo.includes('WhatsApp')).length;
+  const humPrefPct = ((humPrefCount / (t.respostas || 1)) * 100).toFixed(1);
+  document.getElementById('heroPref').textContent = humPrefPct + '%';
+  document.getElementById('heroPrefSub').textContent = humPrefCount + ' alunos optaram por WhatsApp/Presencial na unidade';
+
+  document.getElementById('kpiTotal').textContent = t.respostas;
+  document.getElementById('kpiTotalFoot').textContent = brand === 'todos' ? '35 Estácio · 14 Wyden' : (brand === 'estacio' ? '100% Canal Estácio' : '100% Canal Wyden');
+
+  document.getElementById('kpiNossoCanal').textContent = t.nosso_canal;
+  document.getElementById('kpiNossoCanalFoot').textContent = t.nosso_canal_pct.toFixed(1) + '% direcionados por cobrança nossa';
+
+  document.getElementById('kpiOutroCanal').textContent = t.outro_canal;
+  document.getElementById('kpiOutroCanalFoot').textContent = t.outro_canal_pct.toFixed(1) + '% contatados por outros canais';
+
+  document.getElementById('kpiUnidadesCount').textContent = t.unidades_qtd;
+  document.getElementById('kpiUnidadesFoot').textContent = brand === 'todos' ? '16 Estácio · 2 Wyden' : (brand === 'estacio' ? '16 Unidades Estácio' : '2 Unidades Wyden');
+
+  renderFunnel(data.respostas);
+  renderDonut(data.respostas);
+  renderTopUnits(data.unidades);
+  renderAlerts(data);
+  renderUnitCompChart(data.unidades);
+  renderUnitCards(data.unidades);
+  renderTable();
 }
 
-// ---------- MOTIVOS / FUNIL ----------
-function renderFunnel(filter) {
-  const resp = filterDataset(filter);
-  const total = resp.length || 1;
+function renderFunnel(respostas) {
   const box = document.getElementById('funnelBox');
-
+  const total = respostas.length || 1;
   const counts = {};
-  resp.forEach(r => {
+
+  respostas.forEach(r => {
     let m = r.motivo;
-    if (m.includes('Eduarda Barreto')) m = 'Elogio Específico ao Atendente (Eduarda Barreto)';
-    else if (m.includes('WhatsApp')) m = 'WhatsApp / Atendimento de Confiança Presencial';
+    if (m.includes('Eduarda Barreto')) m = 'Elogio Específico Atendente (Eduarda Barreto)';
+    else if (m.includes('WhatsApp')) m = 'WhatsApp / Atendimento Presencial de Confiança';
     else if (m.includes('presencialmente')) m = 'Atendimento Presencial no Campus/Unidade';
-    else m = 'Procurou Atendimento Direto (Sem canal específico)';
+    else m = 'Atendimento Direto (Sem canal específico)';
     counts[m] = (counts[m] || 0) + 1;
   });
 
   const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
   box.innerHTML = '';
 
-  const colors = ['#2FD9B0', '#5B9FE8', '#E8C468', '#F2A93B'];
+  const colors = getComputedStyle(document.body).getPropertyValue('--brand-primary').trim();
+  const secondary = getComputedStyle(document.body).getPropertyValue('--brand-secondary').trim();
+  const accent = getComputedStyle(document.body).getPropertyValue('--brand-accent').trim();
+  const palette = [colors, secondary, accent, '#F2A93B'];
+
   sorted.forEach(([label, val], idx) => {
     const pct = ((val / total) * 100).toFixed(1);
     const row = document.createElement('div');
     row.innerHTML = `
       <div class="funnel-row">
         <div class="funnel-label" title="${label}">${label}</div>
-        <div class="funnel-track"><div class="funnel-fill" style="width:${pct}%; background:${colors[idx % colors.length]};">${pct}%</div></div>
+        <div class="funnel-track"><div class="funnel-fill" style="width:${pct}%; background:${palette[idx % palette.length]};">${pct}%</div></div>
         <div class="funnel-value">${val} alunos</div>
       </div>`;
     box.appendChild(row);
   });
 }
 
-// ---------- DONUT (NOTAS) ----------
-function renderDonut(filter) {
-  const resp = filterDataset(filter);
-  const nota5 = resp.filter(r => r.avaliacao === 5).length;
-  const nota4 = resp.filter(r => r.avaliacao === 4).length;
-  const nota31 = resp.filter(r => r.avaliacao <= 3).length;
+function renderDonut(respostas) {
+  const nota5 = respostas.filter(r => r.avaliacao === 5).length;
+  const nota4 = respostas.filter(r => r.avaliacao === 4).length;
+  const nota31 = respostas.filter(r => r.avaliacao <= 3).length;
+
+  const primary = getComputedStyle(document.body).getPropertyValue('--brand-primary').trim();
+  const amber = getComputedStyle(document.body).getPropertyValue('--amber').trim();
+  const red = getComputedStyle(document.body).getPropertyValue('--red').trim();
 
   const ctx = document.getElementById('chartDonut');
   if(charts.donut) charts.donut.destroy();
@@ -564,35 +621,36 @@ function renderDonut(filter) {
       labels:['Nota 5 (Excelente)','Nota 4 (Bom)','Nota 1-3 (Insatisfeito)'],
       datasets:[{
         data:[nota5, nota4, nota31],
-        backgroundColor:['#2FD9B0','#E8C468','#F2545B'],
-        borderColor:'#171F29',
+        backgroundColor:[primary, amber, red],
+        borderColor: getComputedStyle(document.body).getPropertyValue('--panel').trim(),
         borderWidth:3,
       }]
     },
     options:{
       cutout:'68%',
       plugins:{
-        legend:{position:'bottom', labels:{color:'#9AA6B4', font:{family:'Inter', size:12}, padding:16}},
-        tooltip:{callbacks:{label:(c)=> c.label+': '+c.raw+' respostas ('+((c.raw/(resp.length||1))*100).toFixed(1)+'%)'}}
+        legend:{position:'bottom', labels:{color:getComputedStyle(document.body).getPropertyValue('--text-dim').trim(), font:{family:'Inter', size:12}, padding:16}},
+        tooltip:{callbacks:{label:(c)=> c.label+': '+c.raw+' respostas ('+((c.raw/(respostas.length||1))*100).toFixed(1)+'%)'}}
       }
     }
   });
 }
 
-// ---------- TOP UNITS ----------
-function renderTopUnits(filter) {
-  const units = [...filterUnits(filter)].sort((a,b) => b.total - a.total).slice(0, 8);
-  document.getElementById('topUnitsDesc').textContent = 'Unidades com maior volume de participação';
+function renderTopUnits(unidades) {
+  const sorted = [...unidades].sort((a,b) => b.total - a.total).slice(0, 8);
+  const primary = getComputedStyle(document.body).getPropertyValue('--brand-primary').trim();
+  const secondary = getComputedStyle(document.body).getPropertyValue('--brand-secondary').trim();
+
   const ctx = document.getElementById('chartTopUnits');
   if(charts.top) charts.top.destroy();
   charts.top = new Chart(ctx, {
     type:'bar',
     data:{
-      labels: units.map(d=>d.unidade.replace(' (WYDEN)', '').replace('ESTÁCIO - ', '')),
+      labels: sorted.map(d=>d.unidade.replace(' (WYDEN)', '').replace('ESTÁCIO - ', '')),
       datasets:[{
-        data: units.map(d=>d.total),
-        backgroundColor: units.map((d,i)=> i===0?'#2FD9B0':'rgba(47,217,176,0.55)'),
-        borderRadius:5,
+        data: sorted.map(d=>d.total),
+        backgroundColor: sorted.map((d,i)=> i===0? primary : secondary),
+        borderRadius:6,
         maxBarThickness:22,
       }]
     },
@@ -600,53 +658,45 @@ function renderTopUnits(filter) {
       indexAxis:'y',
       plugins:{legend:{display:false}, tooltip:{callbacks:{label:(c)=>'Total Respostas: ' + c.raw}}},
       scales:{
-        x:{ticks:{color:'#63707F', font:{family:'IBM Plex Mono', size:10.5}}, grid:{color:'#212a34'}},
-        y:{ticks:{color:'#9AA6B4', font:{family:'Inter', size:11.5}}, grid:{display:false}}
+        x:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-faint').trim(), font:{family:'IBM Plex Mono', size:10.5}}, grid:{color:getComputedStyle(document.body).getPropertyValue('--stroke-soft').trim()}},
+        y:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-dim').trim(), font:{family:'Inter', size:11.5}}, grid:{display:false}}
       }
     }
   });
 }
 
-// ---------- ALERTS & DESTAQUES ----------
-function renderAlerts(filter) {
-  const resp = filterDataset(filter);
+function renderAlerts(data) {
   const box = document.getElementById('alertList');
   box.innerHTML = '';
 
-  const wydenCaruaru = resp.filter(r => r.unidade.includes('CARUARU'));
-  const estacioSL = resp.filter(r => r.unidade.includes('SÃO LUÍS'));
-  const estacioBelem = resp.filter(r => r.unidade.includes('BELÉM'));
+  const unitsSorted = [...data.unidades].sort((a,b) => b.total - a.total);
+  const top1 = unitsSorted[0];
+  const top2 = unitsSorted[1] || unitsSorted[0];
 
   const items = [
     {
-      name: 'UNIFAVIP (WYDEN) CARUARU - PE',
-      tag: '10 respostas · Média 4.50 (8 notas 5, 1 nota 4, 1 nota 1)',
-      badge: '4.50',
-      badgeClass: 'warn'
+      name: top1 ? top1.unidade : 'Unidade Principal',
+      tag: top1 ? `${top1.total} respostas · CSAT Média ${top1.media.toFixed(2)} (${top1.nota5} notas 5)` : '',
+      badge: top1 ? top1.media.toFixed(2) : '5.0',
+      badgeClass: top1 && top1.media < 4.8 ? 'warn' : 'good'
     },
     {
-      name: 'SÃO LUÍS - MA (Estácio)',
-      tag: '5 respostas · 100% Nota 5 (CSAT Máximo)',
-      badge: '5.00',
+      name: top2 ? top2.unidade : 'Segunda Unidade',
+      tag: top2 ? `${top2.total} respostas · CSAT Média ${top2.media.toFixed(2)} (${top2.nota5} notas 5)` : '',
+      badge: top2 ? top2.media.toFixed(2) : '5.0',
       badgeClass: 'good'
     },
     {
-      name: 'UNIFACID (WYDEN) TERESINA - PI',
-      tag: '4 respostas · 100% Nota 5 (CSAT Máximo)',
-      badge: '5.00',
+      name: 'Direcionamento Canal Próprio (Cobrança Ativa)',
+      tag: `${data.totais.nosso_canal} alunos receberam mensagem/ligação direcionando ao nosso canal`,
+      badge: `${data.totais.nosso_canal_pct.toFixed(1)}%`,
       badgeClass: 'good'
     },
     {
-      name: 'BELÉM - PA (Estácio)',
-      tag: '4 respostas · 100% Nota 5 (CSAT Máximo)',
-      badge: '5.00',
-      badgeClass: 'good'
-    },
-    {
-      name: 'ARACAJU - SE (Estácio)',
-      tag: '4 respostas · 100% Nota 5 (CSAT Máximo)',
-      badge: '5.00',
-      badgeClass: 'good'
+      name: 'Contato por Canais de Terceiros / Outros',
+      tag: `${data.totais.outro_canal} alunos relataram abordagens por canais externos`,
+      badge: `${data.totais.outro_canal_pct.toFixed(1)}%`,
+      badgeClass: data.totais.outro_canal_pct > 30 ? 'warn' : 'good'
     }
   ];
 
@@ -664,155 +714,101 @@ function renderAlerts(filter) {
   });
 }
 
-// ---------- MARCAS COMPARATIVO ----------
-function renderTrend() {
-  const ctx = document.getElementById('chartTrend');
-  if(charts.trend) charts.trend.destroy();
-  charts.trend = new Chart(ctx, {
-    data:{
-      labels:['Estácio','Wyden'],
-      datasets:[
-        {
-          type:'bar', label:'Total Respostas', yAxisID:'y',
-          data:[35, 14],
-          backgroundColor:'rgba(91,159,232,0.6)', borderRadius:6, maxBarThickness:60, order:2
-        },
-        {
-          type:'line', label:'Nota Média (CSAT)', yAxisID:'y1',
-          data:[4.97, 4.64],
-          borderColor:'#2FD9B0', backgroundColor:'#2FD9B0', tension:0.2, pointRadius:6, borderWidth:3, order:1
-        }
-      ]
-    },
-    options:{
-      interaction:{mode:'index', intersect:false},
-      plugins:{
-        legend:{position:'bottom', labels:{color:'#9AA6B4', font:{family:'Inter', size:12}, padding:16}},
-        tooltip:{callbacks:{label:(c)=>{
-          if(c.dataset.label==='Nota Média (CSAT)') return c.dataset.label+': '+c.raw+' / 5.0';
-          return c.dataset.label+': '+c.raw+' respostas';
-        }}}
-      },
-      scales:{
-        y:{position:'left', ticks:{color:'#63707F', font:{family:'IBM Plex Mono', size:10.5}}, grid:{color:'#212a34'}},
-        y1:{position:'right', min:3.5, max:5.1, ticks:{color:'#2FD9B0', font:{family:'IBM Plex Mono', size:10.5}}, grid:{display:false}},
-        x:{ticks:{color:'#9AA6B4', font:{family:'Inter', size:12.5}}, grid:{display:false}}
-      }
-    }
-  });
-}
+function renderUnitCompChart(unidades) {
+  const sorted = [...unidades].sort((a,b) => b.media - a.media || b.total - a.total);
+  const primary = getComputedStyle(document.body).getPropertyValue('--brand-primary').trim();
+  const secondary = getComputedStyle(document.body).getPropertyValue('--brand-secondary').trim();
 
-// ---------- RISERS & FALLERS (Origem e Destaques) ----------
-function renderMovers() {
-  const boxR = document.getElementById('risersBox');
-  boxR.innerHTML = `
-    <div class="alert-item">
-      <div>
-        <div class="name">Recebeu Contato do Nosso Canal</div>
-        <div class="tag">Alunos direcionados ativamente via e-mail, SMS ou WhatsApp</div>
-      </div>
-      <div class="alert-badge good">29 (59.2%)</div>
-    </div>
-    <div class="alert-item">
-      <div>
-        <div class="name">Sem Cobrança Prévia Nosso Canal</div>
-        <div class="tag">Alunos que buscaram atendimento espontaneamente no campus</div>
-      </div>
-      <div class="alert-badge warn">20 (40.8%)</div>
-    </div>
-    <div class="alert-item">
-      <div>
-        <div class="name">Contatados por Outros Canas (Terceiros)</div>
-        <div class="tag">Alunos que receberam ligação/e-mail direcionando para fora</div>
-      </div>
-      <div class="alert-badge bad">12 (24.5%)</div>
-    </div>
-  `;
+  document.getElementById('unitChartTitle').textContent = `Desempenho de CSAT e Respostas por Unidade (${sorted.length} Campus)`;
 
-  const boxF = document.getElementById('fallersBox');
-  boxF.innerHTML = `
-    <div class="alert-item">
-      <div>
-        <div class="name">Preferência por Atendimento Humano/WhatsApp</div>
-        <div class="tag">63.3% optam por negociar com atendente de confiança presencial/WhatsApp</div>
-      </div>
-      <div class="alert-badge good">31 alunos</div>
-    </div>
-    <div class="alert-item">
-      <div>
-        <div class="name">Preferência por Atendimento Presencial</div>
-        <div class="tag">30.6% preferem ir fisicamente à unidade/campus</div>
-      </div>
-      <div class="alert-badge good">15 alunos</div>
-    </div>
-    <div class="alert-item">
-      <div>
-        <div class="name">Atendimento com Elogio Nominal</div>
-        <div class="tag">Destaque para colaboradora Eduarda Barreto (Atendimento humanizado)</div>
-      </div>
-      <div class="alert-badge good">★ Elogio</div>
-    </div>
-  `;
-}
-
-// ---------- CONVERSION CHART (AVALIAÇÃO POR UNIDADE) ----------
-function renderConversionChart() {
-  const units = [...DATA.unidades].sort((a,b) => b.media - a.media || b.total - a.total);
-  const ctx = document.getElementById('chartConversion');
-  if(charts.conv) charts.conv.destroy();
-  charts.conv = new Chart(ctx, {
+  const ctx = document.getElementById('chartUnitComp');
+  if(charts.unitComp) charts.unitComp.destroy();
+  charts.unitComp = new Chart(ctx, {
     type:'bar',
     data:{
-      labels: units.map(d=>d.unidade.replace(' (WYDEN)', '').replace('ESTÁCIO - ', '')),
+      labels: sorted.map(d=>d.unidade.replace(' (WYDEN)', '').replace('ESTÁCIO - ', '')),
       datasets:[
-        {label:'Nota Média (CSAT)', data:units.map(d=>d.media), backgroundColor:'rgba(47,217,176,0.75)', borderRadius:4, maxBarThickness:12},
-        {label:'Total Respostas', data:units.map(d=>d.total), backgroundColor:'rgba(91,159,232,0.45)', borderRadius:4, maxBarThickness:12}
+        {label:'Nota Média (CSAT)', data:sorted.map(d=>d.media), backgroundColor:primary, borderRadius:5, maxBarThickness:14},
+        {label:'Total Respostas', data:sorted.map(d=>d.total), backgroundColor:secondary, borderRadius:5, maxBarThickness:14}
       ]
     },
     options:{
       indexAxis:'y',
       plugins:{
-        legend:{position:'top', align:'end', labels:{color:'#9AA6B4', font:{family:'Inter', size:12}}},
+        legend:{position:'top', align:'end', labels:{color:getComputedStyle(document.body).getPropertyValue('--text-dim').trim(), font:{family:'Inter', size:12}}},
         tooltip:{callbacks:{label:(c)=>c.dataset.label+': '+c.raw}}
       },
       scales:{
-        x:{min:0, max:5.2, ticks:{color:'#63707F', font:{family:'IBM Plex Mono', size:10}}, grid:{color:'#212a34'}},
-        y:{ticks:{color:'#9AA6B4', font:{family:'Inter', size:10.5}}, grid:{display:false}}
+        x:{min:0, max:5.2, ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-faint').trim(), font:{family:'IBM Plex Mono', size:10}}, grid:{color:getComputedStyle(document.body).getPropertyValue('--stroke-soft').trim()}},
+        y:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-dim').trim(), font:{family:'Inter', size:11}}, grid:{display:false}}
       }
     }
   });
 }
 
-// ---------- TABLE ----------
-function renderTable(filter) {
-  const list = filterDataset(filter);
+function renderUnitCards(unidades) {
+  const grid = document.getElementById('unitGridCards');
+  grid.innerHTML = '';
+
+  const sorted = [...unidades].sort((a,b) => b.total - a.total || b.media - a.media);
+
+  sorted.forEach(u => {
+    const card = document.createElement('div');
+    card.className = 'unit-card';
+    const brandClass = u.fonte === 'Estácio' ? 'estacio-pill' : 'wyden-pill';
+    const badgeClass = u.media >= 4.8 ? 'good' : 'warn';
+    const pctNosso = ((u.nosso_canal_sim / (u.total || 1)) * 100).toFixed(0);
+
+    card.innerHTML = `
+      <div class="unit-card-header">
+        <div>
+          <div class="unit-card-title">${u.unidade}</div>
+          <span class="tag-pill ${brandClass}">${u.fonte}</span>
+        </div>
+        <div class="alert-badge ${badgeClass}">${u.media.toFixed(2)} ★</div>
+      </div>
+      <div class="unit-card-stats">
+        <div class="unit-stat-item">Respostas Total<div class="unit-stat-val">${u.total} alunos</div></div>
+        <div class="unit-stat-item">Notas 5 (CSAT)<div class="unit-stat-val">${u.nota5} (${((u.nota5/u.total)*100).toFixed(0)}%)</div></div>
+        <div class="unit-stat-item">Cobrança Nosso Canal<div class="unit-stat-val">${u.nosso_canal_sim} (${pctNosso}%)</div></div>
+        <div class="unit-stat-item">Canais de Terceiros<div class="unit-stat-val">${u.outro_canal_sim} (${((u.outro_canal_sim/u.total)*100).toFixed(0)}%)</div></div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderTable() {
+  const data = getFilteredData(currentBrand);
   const search = document.getElementById('searchBox').value.toLowerCase();
-  let filtered = list.filter(d => 
-    d.unidade.toLowerCase().includes(search) || 
-    d.fonte.toLowerCase().includes(search) || 
-    d.motivo.toLowerCase().includes(search)
+
+  let filtered = data.respostas.filter(d =>
+    d.unidade.toLowerCase().includes(search) ||
+    d.fonte.toLowerCase().includes(search) ||
+    d.motivo.toLowerCase().includes(search) ||
+    d.matricula.toLowerCase().includes(search)
   );
 
   filtered.sort((a,b) => (a[sortKey] > b[sortKey] ? 1 : -1) * sortDir);
 
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = '';
+
   filtered.forEach((d, idx) => {
-    const rank = idx + 1;
-    const rankClass = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
     const notaTag = d.avaliacao === 5 ? 'ok' : d.avaliacao === 4 ? 'warn' : 'bad';
-    
+    const brandTag = d.fonte === 'Estácio' ? 'estacio-pill' : 'wyden-pill';
     let motivoShort = d.motivo;
     if (motivoShort.length > 55) motivoShort = motivoShort.substring(0, 52) + '...';
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="unit-cell"><span class="rank-badge ${rankClass}">${rank}</span>${d.unidade}</td>
-      <td><span class="tag-pill ${d.fonte==='Estácio'?'ok':'warn'}">${d.fonte}</span></td>
+      <td class="unit-cell">${d.unidade}</td>
+      <td><span class="tag-pill ${brandTag}">${d.fonte}</span></td>
       <td><span class="tag-pill ${notaTag}">${d.avaliacao} ★</span></td>
       <td>${d.nosso_canal}</td>
       <td>${d.outro_canal}</td>
       <td title="${d.motivo.replace(/"/g, '&quot;')}">${motivoShort}</td>
+      <td>${d.matricula || '—'}</td>
       <td>${d.timestamp.substring(0, 16)}</td>
     `;
     tbody.appendChild(tr);
@@ -830,27 +826,13 @@ function renderTable(filter) {
   });
 }
 
-// ---------- RENDER ALL ----------
-function renderAll(filter) {
-  renderHero(filter);
-  renderFunnel(filter);
-  renderDonut(filter);
-  renderTopUnits(filter);
-  renderAlerts(filter);
-  renderTable(filter);
-  renderTrend();
-  renderMovers();
-  renderConversionChart();
-}
-
-// ---------- EVENTS ----------
 document.getElementById('periodSwitch').addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if(!btn) return;
   document.querySelectorAll('#periodSwitch button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  currentFilter = btn.dataset.period;
-  renderAll(currentFilter);
+  currentBrand = btn.dataset.period;
+  renderDashboard(currentBrand);
 });
 
 document.getElementById('tabs').addEventListener('click', (e) => {
@@ -866,14 +848,13 @@ document.querySelectorAll('#dataTable thead th').forEach(th => {
   th.addEventListener('click', () => {
     const key = th.dataset.key;
     if(sortKey === key){ sortDir *= -1; } else { sortKey = key; sortDir = key === 'unidade' ? 1 : -1; }
-    renderTable(currentFilter);
+    renderTable();
   });
 });
 
-document.getElementById('searchBox').addEventListener('input', () => renderTable(currentFilter));
+document.getElementById('searchBox').addEventListener('input', renderTable);
 
-// ---------- INIT ----------
-renderAll('todos');
+renderDashboard('todos');
 </script>
 </body>
 </html>
