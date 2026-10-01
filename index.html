@@ -507,13 +507,13 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
         <table class="data" id="dataTable">
           <thead>
             <tr>
-              <th data-key="unidade">Campus / Unidade</th>
+              <th data-key="unidade">Campus / Unidade<br><small style="font-size:9.5px; color:var(--text-faint); font-weight:normal; text-transform:none;">Em qual unidade você foi atendido?</small></th>
               <th data-key="fonte">Marca</th>
-              <th data-key="avaliacao">Nota CSAT</th>
-              <th data-key="nosso_canal">Atendido Canal Próprio</th>
-              <th data-key="outro_canal">Contatado por Terceiros</th>
-              <th data-key="motivo">Motivo da Escolha</th>
-              <th data-key="matricula">Matrícula</th>
+              <th data-key="avaliacao">Nota CSAT<br><small style="font-size:9.5px; color:var(--text-faint); font-weight:normal; text-transform:none;">Como avalia nosso atendimento?</small></th>
+              <th data-key="nosso_canal">Canal Próprio<br><small style="font-size:9.5px; color:var(--text-faint); font-weight:normal; text-transform:none;">Recebeu cobrança que direcionou ao nosso canal?</small></th>
+              <th data-key="outro_canal">Canal Externo<br><small style="font-size:9.5px; color:var(--text-faint); font-weight:normal; text-transform:none;">Recebeu cobrança que direcionou a outro canal?</small></th>
+              <th data-key="motivo">Motivo da Escolha<br><small style="font-size:9.5px; color:var(--text-faint); font-weight:normal; text-transform:none;">O que fez você optar pelo nosso canal?</small></th>
+              <th data-key="matricula">Matrícula<br><small style="font-size:9.5px; color:var(--text-faint); font-weight:normal; text-transform:none;">Qual sua matrícula?</small></th>
               <th data-key="timestamp">Data/Hora</th>
             </tr>
           </thead>
@@ -524,6 +524,20 @@ footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-
   </section>
 
 </main>
+
+
+<!-- MODAL DE PERGUNTAS E RESPOSTAS FORMULÁRIO -->
+<div id="qaModal" style="display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--panel-card); border:1px solid var(--stroke); border-radius:20px; max-width:720px; width:100%; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.6); position:relative; max-height:90vh; overflow-y:auto;">
+    <button onclick="closeQaModal()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:var(--text); width:32px; height:32px; border-radius:50%; font-size:18px; cursor:pointer;">✕</button>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+      <span id="modalBrandBadge" class="tag-pill ok">Estácio</span>
+      <h3 style="font-family:var(--font-display); font-size:18px; color:var(--text);" id="modalTitle">Detalhes do Formulário de Pesquisa</h3>
+    </div>
+    
+    <div style="display:flex; flex-direction:column; gap:14px;" id="modalContent"></div>
+  </div>
+</div>
 
 <div class="wrap">
   <footer class="foot">
@@ -1041,6 +1055,51 @@ document.querySelectorAll('#dataTable thead th').forEach(th => {
 });
 
 document.getElementById('searchBox').addEventListener('input', renderTable);
+
+
+function showQaModal(d) {
+  const modal = document.getElementById('qaModal');
+  const modalBrandBadge = document.getElementById('modalBrandBadge');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalContent = document.getElementById('modalContent');
+
+  modalBrandBadge.className = 'tag-pill ' + (d.fonte === 'Estácio' ? 'estacio-pill' : (d.fonte === 'Wyden' ? 'wyden-pill' : 'idomed-pill'));
+  modalBrandBadge.textContent = d.fonte;
+  modalTitle.textContent = 'Resposta Completa — ' + d.unidade;
+
+  const questions = [
+    { col: 'Coluna E', q: 'Como você avalia nosso atendimento de negociação?', a: d.avaliacao + ' ★ (CSAT)' },
+    { col: 'Coluna F', q: 'Em qual unidade você foi atendido?', a: d.unidade },
+    { col: 'Coluna B', q: 'Você recebeu alguma mensagem, e-mail ou ligação de cobrança que direcionou você ao nosso canal de atendimento?', a: d.nosso_canal },
+    { col: 'Coluna C', q: 'Você recebeu alguma mensagem, e-mail ou ligação de cobrança que direcionou você a outro canal de atendimento?', a: d.outro_canal },
+    { col: 'Coluna D', q: 'O que fez você optar por nosso canal de atendimento?', a: d.motivo },
+    { col: 'Coluna G', q: 'Qual sua matrícula? (Opcional - uso interno para análise)', a: d.matricula || 'Não informada' }
+  ];
+
+  modalContent.innerHTML = questions.map(item => `
+    <div style="background:rgba(0,0,0,0.3); border:1px solid var(--stroke-soft); padding:14px 16px; border-radius:12px;">
+      <div style="font-family:var(--font-mono); font-size:11px; color:var(--brand-primary); text-transform:uppercase; font-weight:700; margin-bottom:4px;">
+        ${item.col} · Pergunta do Formulário:
+      </div>
+      <div style="font-size:13.5px; font-weight:600; color:var(--text); margin-bottom:8px;">
+        "${item.q}"
+      </div>
+      <div style="font-family:var(--font-mono); font-size:13px; color:var(--text-dim); background:rgba(255,255,255,0.05); padding:8px 12px; border-radius:8px; border-left:3px solid var(--brand-primary);">
+        👉 <strong>Resposta do Aluno:</strong> ${item.a}
+      </div>
+    </div>
+  `).join('');
+
+  modal.style.display = 'flex';
+}
+
+function closeQaModal() {
+  document.getElementById('qaModal').style.display = 'none';
+}
+
+document.getElementById('qaModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'qaModal') closeQaModal();
+});
 
 renderDashboard('todos');
 </script>
