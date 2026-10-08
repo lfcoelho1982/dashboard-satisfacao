@@ -237,4 +237,591 @@ section.view.active{display:block; animation:fade .35s ease;}
 .funnel-label{font-size:12px; color:var(--text-dim); font-family:var(--font-mono); line-height:1.3;}
 .funnel-track{height:34px; background:rgba(0,0,0,0.3); border-radius:8px; overflow:hidden; position:relative; border:1px solid var(--stroke-soft);}
 .funnel-fill{height:100%; border-radius:8px; display:flex; align-items:center; padding-left:12px; font-family:var(--font-mono); font-size:12px; font-weight:700; color:#FFFFFF; transition:width 0.8s ease;}
+<<<<<<< HEAD
 .funnel-value{font-family:var(--font-mono); font-size:13px; text-align:right; color:var(--text-dim); font-weight:600;}
+=======
+.funnel-value{font-family:var(--font-mono); font-size:13px; text-align:right; color:var(--text-dim); font-weight:600;}
+
+.alert-list{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.alert-item{
+  display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-radius:12px;
+  background:rgba(0,0,0,0.25); border:1px solid var(--stroke-soft); transition:border-color 0.15s ease;
+}
+.alert-item:hover{border-color:var(--stroke);}
+.alert-item .name{font-size:13.5px; font-weight:600;}
+.alert-item .tag{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-top:3px;}
+.alert-badge{font-family:var(--font-mono); font-size:12.5px; font-weight:700; padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.08); color:var(--text);}
+
+.unit-grid-cards{display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; margin-top:10px;}
+.unit-card{
+  background: var(--panel-card); border:1px solid var(--stroke-soft); border-radius:14px; padding:16px 18px;
+  transition: all .25s ease;
+}
+.unit-card:hover{border-color:var(--brand-primary); transform:translateY(-2px); box-shadow:0 6px 16px var(--glow);}
+.unit-card-header{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;}
+.unit-card-title{font-size:14px; font-weight:700; font-family:var(--font-display); line-height:1.2;}
+
+.unit-card-stats{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; padding-top:12px; border-top:1px solid var(--stroke-soft);}
+.unit-stat-item{font-size:11px; font-family:var(--font-mono); color:var(--text-faint);}
+.unit-stat-val{font-size:13px; font-weight:700; color:var(--text); margin-top:2px;}
+
+.table-controls{display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;}
+.search-box{
+  flex:1; min-width:240px; background:rgba(0,0,0,0.3); border:1px solid var(--stroke); border-radius:10px;
+  padding:10px 16px; color:var(--text); font-family:var(--font-body); font-size:13px;
+}
+.search-box:focus{outline:none; border-color:var(--brand-primary);}
+.search-box::placeholder{color:var(--text-faint);}
+
+table.data{width:100%; border-collapse:collapse; font-size:13px;}
+table.data thead th{
+  text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.5px;
+  color:var(--text-faint); padding:12px 14px; border-bottom:1px solid var(--stroke); cursor:pointer; white-space:nowrap;
+  user-select:none;
+}
+table.data thead th:hover{color:var(--brand-primary);}
+table.data tbody tr{border-bottom:1px solid var(--stroke-soft); transition:background .12s ease;}
+table.data tbody tr:hover{background:rgba(255,255,255,0.05);}
+table.data td{padding:12px 14px; white-space:nowrap; font-family:var(--font-mono); font-variant-numeric:tabular-nums;}
+table.data td.unit-cell{font-family:var(--font-body); font-weight:600; white-space:normal;}
+
+.tag-pill{font-size:10.5px; font-family:var(--font-mono); padding:3px 8px; border-radius:6px; font-weight:700;}
+.tag-pill.wyden-pill{background:rgba(225,29,72,0.18); color:#FB7185; border:1px solid rgba(225,29,72,0.3);}
+.tag-pill.idomed-pill{background:rgba(15,155,142,0.18); color:#2DD4BF; border:1px solid rgba(15,155,142,0.3);}
+
+footer.foot{margin-top:40px; padding-top:20px; border-top:1px solid var(--stroke-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+footer.foot p{font-size:11.5px; color:var(--text-faint); font-family:var(--font-mono);}
+
+.th-title { display: block; font-family: var(--font-display); font-size: 13.5px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+.th-question { display: block; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--brand-primary); margin-top: 6px; text-transform: none; background: rgba(255,255,255,0.08); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--stroke-soft); white-space: normal; line-height: 1.4; }
+.modal-q-card { background: var(--panel-card); border: 1px solid var(--stroke); padding: 18px 20px; border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+.modal-q-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #FFFFFF; background: linear-gradient(90deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 100%); padding: 10px 14px; border-radius: 10px; border-left: 4px solid var(--brand-primary); margin-bottom: 8px; line-height: 1.4; }
+.modal-q-answer { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text-dim); background: rgba(0,0,0,0.35); padding: 10px 14px; border-radius: 10px; border: 1px solid var(--stroke-soft); line-height: 1.5; }
+.btn-table-action { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text); background: var(--brand-primary-grad); border: none; padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.btn-table-action:hover { transform: translateY(-1px); filter: brightness(1.15); box-shadow: 0 4px 12px var(--glow); }
+.scroll-nav-btn { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--text-dim); background: rgba(0,0,0,0.3); border: 1px solid var(--stroke-soft); padding: 8px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; }
+.scroll-nav-btn:hover { color: var(--text); border-color: var(--brand-primary); background: rgba(255,255,255,0.08); }
+</style>
+</head>
+<body class="theme-wyden">
+
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="brand">
+        <div class="brand-mark" id="brandMark">🏛️</div>
+        <div>
+          <h1 id="brandTitle">Painel de Satisfação ATP</h1>
+          <p id="periodTag">CARREGANDO INDICADORES...</p>
+        </div>
+      </div>
+      <div class="period-switch" id="periodSwitch">
+        <button data-period="wyden" class="active btn-wyden">🏛️ Wyden</button>
+        <button data-period="idomed" class="btn-idomed">🩺 IDOMED</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button data-view="visao" class="active">📊 Visão Geral e Indicadores</button>
+      <button data-view="unidades">🏢 Análise por Campus/Unidade</button>
+      <button data-view="tabela">📋 Registro Completo de Respostas</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="view active" id="view-visao">
+    <div class="nps-legend-bar">
+      <span class="nps-legend-title">💡 Classificação Oficial NPS:</span>
+      <div class="nps-legend-items">
+        <div class="nps-item-tag"><span class="nps-dot promotor"></span> <strong>Promotores (Notas 9 a 10 / Nota 5):</strong> Alunos entusiasmados.</div>
+        <div class="nps-item-tag"><span class="nps-dot neutro"></span> <strong>Neutros (Notas 7 a 8 / Nota 4):</strong> Alunos satisfeitos.</div>
+        <div class="nps-item-tag"><span class="nps-dot detrator"></span> <strong>Detratores (Notas 0 a 6 / Notas 1 a 3):</strong> Alunos insatisfeitos.</div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-card">
+        <div class="hero-label">Índice de Satisfação Média (CSAT)</div>
+        <div class="hero-value" id="heroCSAT">0,00 / 5,0</div>
+        <div class="hero-sub">
+          <span class="delta" id="heroDelta">0% Avaliação Máxima</span>
+          <span id="heroCSATSub">-</span>
+        </div>
+      </div>
+      <div class="hero-split">
+        <div class="split-card">
+          <div class="hero-label">Pontuação do Promotor (NPS)</div>
+          <div class="hero-value" id="heroNPS">+0,0</div>
+          <div class="hero-sub" style="margin-top:6px;" id="heroNPSSub">Zona de Excelência</div>
+        </div>
+        <div class="split-card">
+          <div class="hero-label">Preferência por Atendimento Humano / Presencial</div>
+          <div class="hero-value" id="heroPref">0%</div>
+          <div class="hero-sub" style="margin-top:6px;" id="heroPrefSub">WhatsApp ou atendimento presencial</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-label">Total de Respostas</span><div class="kpi-icon">◎</div></div>
+        <div class="kpi-value" id="kpiTotal">0</div>
+        <div class="kpi-foot" id="kpiTotalFoot">-</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-label">Contatados via Canal Próprio</span><div class="kpi-icon">◐</div></div>
+        <div class="kpi-value" id="kpiNossoCanal">0</div>
+        <div class="kpi-foot" id="kpiNossoCanalFoot">Direcionados por cobrança ativa</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-label">Contatados via Canal Externo</span><div class="kpi-icon">⚡</div></div>
+        <div class="kpi-value" id="kpiOutroCanal">0</div>
+        <div class="kpi-foot" id="kpiOutroCanalFoot">Abordados por terceiros</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-label">Total de Campus/Unidades</span><div class="kpi-icon">🏛️</div></div>
+        <div class="kpi-value" id="kpiUnidadesCount">0</div>
+        <div class="kpi-foot" id="kpiUnidadesFoot">-</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Motivos de Escolha do Canal de Atendimento</div></div></div>
+        <div class="funnel" id="funnelBox"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Distribuição das Notas de Satisfação (1 a 5)</div></div></div>
+        <div class="chart-box"><canvas id="chartDonut"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Principais Campus por Volume de Respostas</div></div></div>
+        <div class="chart-box tall"><canvas id="chartTopUnits"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Destaques e Resumo por Unidade</div></div></div>
+        <div class="alert-list" id="alertList"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="view" id="view-unidades">
+    <div class="eyebrow">Visualização Detalhada por Campus / Unidade</div>
+    <div class="panel" style="margin-bottom:22px;">
+      <div class="panel-head"><div><div class="panel-title" id="unitChartTitle">Desempenho de Satisfação por Campus (CSAT Média)</div></div></div>
+      <div class="chart-box tall" style="height:380px;"><canvas id="chartUnitComp"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><div class="panel-title">Cartões Individuais das Unidades</div></div></div>
+      <div class="unit-grid-cards" id="unitGridCards"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-tabela">
+    <div class="panel">
+      <div class="panel-head"><div><div class="panel-title">Registro Detalhado de Respostas</div></div></div>
+      <div class="table-controls">
+        <input type="text" class="search-box" id="searchBox" placeholder="🔍 Buscar por campus, marca, matrícula ou motivo..." oninput="renderTable()">
+        <div style="display:flex; gap:8px;">
+          <button class="scroll-nav-btn" onclick="scrollTable(-300)">◀ Perguntas da Esquerda</button>
+          <button class="scroll-nav-btn" onclick="scrollTable(300)">Perguntas da Direita ▶</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="data" id="dataTable">
+          <thead>
+            <tr>
+              <th style="width:130px; text-align:center;"><span class="th-title">Perguntas</span><span class="th-question" style="text-align:center;">📋 Ver Tudo</span></th>
+              <th data-key="unidade"><span class="th-title">Campus / Unidade</span><span class="th-question">❓ "Em qual unidade você foi atendido?"</span></th>
+              <th data-key="fonte"><span class="th-title">Marca</span></th>
+              <th data-key="avaliacao"><span class="th-title">Nota CSAT</span><span class="th-question">❓ "Como avalia nosso atendimento?"</span></th>
+              <th data-key="nosso_canal"><span class="th-title">Canal Próprio</span><span class="th-question">❓ "Recebeu cobrança ativamente nossa?"</span></th>
+              <th data-key="outro_canal"><span class="th-title">Canal Externo</span><span class="th-question">❓ "Recebeu cobrança de terceiros?"</span></th>
+              <th data-key="motivo"><span class="th-title">Motivo da Escolha</span><span class="th-question">❓ "O que fez optar por nosso canal?"</span></th>
+              <th data-key="matricula"><span class="th-title">Matrícula</span><span class="th-question">❓ "Qual sua matrícula?"</span></th>
+              <th data-key="timestamp"><span class="th-title">Data/Hora</span></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="qaModal" style="display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--panel-card); border:1px solid var(--stroke); border-radius:20px; max-width:720px; width:100%; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.6); position:relative; max-height:90vh; overflow-y:auto;">
+    <button onclick="closeQaModal()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:var(--text); width:32px; height:32px; border-radius:50%; font-size:18px; cursor:pointer;">✕</button>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+      <span id="modalBrandBadge" class="tag-pill idomed-pill">IDOMED</span>
+      <h3 style="font-family:var(--font-display); font-size:18px; color:var(--text);" id="modalTitle">Detalhes do Formulário de Pesquisa</h3>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:14px;" id="modalContent"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer class="foot">
+    <p>PAINEL INTERATIVO ATP — WYDEN & IDOMED · RECUPERAÇÃO DE CRÉDITO 2026</p>
+    <p id="footUpdated">DADOS ATUALIZADOS EM SETEMBRO/2026</p>
+  </footer>
+</div>
+
+<script>
+const RAW_DATA = {
+  "totais": {
+    "wyden": {"respostas": 25, "media": 4.80, "csat5_pct": 92.0, "nps": 88.0, "promotores": 23, "neutros": 1, "detratores": 1, "nosso_canal": 20, "nosso_canal_pct": 80.0, "outro_canal": 11, "outro_canal_pct": 44.0, "unidades_qtd": 2},
+    "idomed": {"respostas": 1, "media": 5.00, "csat5_pct": 100.0, "nps": 100.0, "promotores": 1, "neutros": 0, "detratores": 0, "nosso_canal": 1, "nosso_canal_pct": 100.0, "outro_canal": 0, "outro_canal_pct": 0.0, "unidades_qtd": 1}
+  },
+  "unidades": [
+    {"unidade": "UNIFACID (WYDEN) TERESINA - PI", "fonte": "Wyden", "total": 4, "media": 5.0, "nota5": 4, "nosso_canal_sim": 3, "outro_canal_sim": 1},
+    {"unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "fonte": "Wyden", "total": 21, "media": 4.76, "nota5": 19, "nosso_canal_sim": 17, "outro_canal_sim": 10},
+    {"unidade": "IDOMED - ABEU / CAMPUS MED", "fonte": "IDOMED", "total": 1, "media": 5.0, "nota5": 1, "nosso_canal_sim": 1, "outro_canal_sim": 0}
+  ],
+  "respostas": [
+    {"timestamp": "2026-09-18 16:45:57", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-18 16:57:44", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-18 17:10:05", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-18 18:58:04", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 4, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-21 11:32:22", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-21 13:36:45", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "Medicine veterinary"},
+    {"timestamp": "2026-09-21 20:51:55", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-22 16:16:36", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-22 18:51:19", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "202604068165"},
+    {"timestamp": "2026-09-23 13:34:54", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 1, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-23 15:01:19", "fonte": "Wyden", "unidade": "UNIFACID (WYDEN) TERESINA - PI", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-23 16:09:28", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-23 17:38:36", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-23 20:17:12", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-25 19:47:33", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-28 13:33:08", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Não", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-28 13:47:43", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-28 14:40:19", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "202502410077"},
+    {"timestamp": "2026-09-28 15:31:36", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-28 16:42:54", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "201651308241"},
+    {"timestamp": "2026-09-28 17:18:20", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": ""},
+    {"timestamp": "2026-09-28 19:03:30", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Ser atendido(a) presencialmente na unidade/campus", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202608307581@alunos.unifavip.edu.br"},
+    {"timestamp": "2026-09-29 11:54:57", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": ""},
+    {"timestamp": "2026-09-29 20:41:25", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Apenas procurei atendimento, sem escolher nenhum canal especifico", "nosso_canal": "Não", "outro_canal": "Não", "matricula": "202303979304"},
+    {"timestamp": "2026-09-30 15:09:02", "fonte": "Wyden", "unidade": "UNIFAVIP (WYDEN) CARUARU - PE", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Sim", "matricula": "202603126137"},
+    {"timestamp": "2026-09-30 16:40:12", "fonte": "IDOMED", "unidade": "IDOMED - ABEU / CAMPUS MED", "avaliacao": 5, "motivo": "Negociar Via WhatsApp com alguém de confiança, que atende presencialmente", "nosso_canal": "Sim", "outro_canal": "Não", "matricula": "202609812401"}
+  ]
+};
+
+let currentBrand = 'wyden';
+let charts = {};
+
+function applyTheme(brand) {
+  const body = document.body;
+  body.classList.remove('theme-wyden', 'theme-idomed');
+  const brandMark = document.getElementById('brandMark');
+  const brandTitle = document.getElementById('brandTitle');
+  
+  if (brand === 'idomed') {
+    body.classList.add('theme-idomed');
+    brandMark.textContent = '🩺';
+    brandTitle.textContent = 'Painel de Satisfação ATP — IDOMED';
+  } else {
+    body.classList.add('theme-wyden');
+    brandMark.textContent = '🏛️';
+    brandTitle.textContent = 'Painel de Satisfação ATP — Wyden';
+  }
+}
+
+function getFilteredData(brand) {
+  const targetFonte = brand === 'idomed' ? 'IDOMED' : 'Wyden';
+  return {
+    totais: RAW_DATA.totais[brand],
+    unidades: RAW_DATA.unidades.filter(u => u.fonte === targetFonte),
+    respostas: RAW_DATA.respostas.filter(r => r.fonte === targetFonte)
+  };
+}
+
+function renderDashboard(brand) {
+  applyTheme(brand);
+  const data = getFilteredData(brand);
+  const t = data.totais;
+
+  document.getElementById('periodTag').textContent = (brand === 'idomed' ? 'MARCA IDOMED (1 CAMPUS)' : 'MARCA WYDEN (2 CAMPUS)') + ' · SETEMBRO 2026 · ' + t.respostas + ' RESPOSTAS';
+  document.getElementById('heroCSAT').textContent = t.media.toFixed(2).replace('.', ',') + ' / 5,0';
+  document.getElementById('heroDelta').textContent = t.csat5_pct.toFixed(1).replace('.', ',') + '% Nota Máxima';
+  document.getElementById('heroCSATSub').textContent = t.promotores + ' de ' + t.respostas + ' alunos avaliaram com nota 5';
+  document.getElementById('heroNPS').textContent = '+' + t.nps.toFixed(1).replace('.', ',');
+  
+  const prefHumano = data.respostas.filter(r => r.motivo.includes('WhatsApp') || r.motivo.includes('presencialmente')).length;
+  const prefPct = ((prefHumano / (t.respostas || 1)) * 100).toFixed(1).replace('.', ',');
+  document.getElementById('heroPref').textContent = prefPct + '%';
+
+  document.getElementById('kpiTotal').textContent = t.respostas;
+  document.getElementById('kpiTotalFoot').textContent = brand === 'idomed' ? '1 Resposta IDOMED' : '25 Respostas Wyden';
+  document.getElementById('kpiNossoCanal').textContent = t.nosso_canal;
+  document.getElementById('kpiNossoCanalFoot').textContent = t.nosso_canal_pct.toFixed(1).replace('.', ',') + '% do total de respostas';
+  document.getElementById('kpiOutroCanal').textContent = t.outro_canal;
+  document.getElementById('kpiOutroCanalFoot').textContent = t.outro_canal_pct.toFixed(1).replace('.', ',') + '% do total de respostas';
+  document.getElementById('kpiUnidadesCount').textContent = t.unidades_qtd;
+  document.getElementById('kpiUnidadesFoot').textContent = brand === 'idomed' ? '1 Unidade Ativa' : '2 Unidades Ativas';
+
+  renderFunnel(data.respostas, brand);
+  renderDonut(data.respostas, brand);
+  renderTopUnits(data.unidades, brand);
+  renderAlerts(data);
+  renderUnitCompChart(data.unidades, brand);
+  renderUnitCards(data.unidades, brand);
+  renderTable();
+}
+
+function renderFunnel(respostas, brand) {
+  const box = document.getElementById('funnelBox');
+  box.innerHTML = '';
+  const total = respostas.length || 1;
+  const counts = {};
+
+  respostas.forEach(r => {
+    let m = r.motivo;
+    if(m.includes('WhatsApp')) m = 'WhatsApp / Presencial Confiança';
+    else if(m.includes('presencialmente')) m = 'Atendimento Presencial na Unidade';
+    else m = 'Procura Direta / Sem Escolha';
+    counts[m] = (counts[m] || 0) + 1;
+  });
+
+  const primaryColor = brand === 'idomed' ? 'linear-gradient(135deg, #2DD4BF 0%, #0F9B8E 100%)' : 'linear-gradient(135deg, #FF7A66 0%, #C0267D 100%)';
+
+  Object.entries(counts).forEach(([label, val]) => {
+    const pct = ((val / total) * 100).toFixed(1).replace('.', ',');
+    box.innerHTML += `
+      <div class="funnel-row">
+        <div class="funnel-label">${label}</div>
+        <div class="funnel-track">
+          <div class="funnel-fill" style="width:${Math.max(pct, 12)}%; background:${primaryColor};">${pct}%</div>
+        </div>
+        <div class="funnel-value">${val} ${val === 1 ? 'aluno' : 'alunos'}</div>
+      </div>`;
+  });
+}
+
+function renderDonut(respostas, brand) {
+  const canvas = document.getElementById('chartDonut');
+  if(charts.donut) charts.donut.destroy();
+  
+  const nota5 = respostas.filter(r => r.avaliacao === 5).length;
+  const nota4 = respostas.filter(r => r.avaliacao === 4).length;
+  const nota1to3 = respostas.filter(r => r.avaliacao <= 3).length;
+
+  const colors = brand === 'idomed' 
+    ? ['#2DD4BF', '#F59E0B', '#EF4444'] 
+    : ['#FF7A66', '#F59E0B', '#EF4444'];
+
+  charts.donut = new Chart(canvas, {
+    type:'doughnut',
+    data:{
+      labels:['Nota 5 (Excelente)', 'Nota 4 (Bom)', 'Nota 1 a 3 (Insatisfeito)'],
+      datasets:[{ 
+        data:[nota5, nota4, nota1to3], 
+        backgroundColor: colors, 
+        borderColor:'#0F172A', 
+        borderWidth:3 
+      }]
+    },
+    options:{ 
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout:'65%', 
+      plugins:{ 
+        legend:{ position:'bottom', labels:{ color:'#FFF', font:{ family:'Inter', size:12 } } } 
+      } 
+    }
+  });
+}
+
+function renderTopUnits(unidades, brand) {
+  const ctx = document.getElementById('chartTopUnits');
+  if(charts.top) charts.top.destroy();
+
+  const barColor = brand === 'idomed' ? '#2DD4BF' : '#FF7A66';
+
+  charts.top = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: unidades.map(d => d.unidade),
+      datasets:[{ label:'Total de Respostas', data: unidades.map(d => d.total), backgroundColor: barColor, borderRadius:6 }]
+    },
+    options:{ 
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis:'y', 
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ ticks:{ color:'#C4B5FD' }, grid:{ color:'rgba(255,255,255,0.05)' } },
+        y:{ ticks:{ color:'#FFF', font:{ size:11 } }, grid:{ display:false } }
+      }
+    }
+  });
+}
+
+function renderAlerts(data) {
+  const box = document.getElementById('alertList');
+  box.innerHTML = '';
+  data.unidades.forEach(u => {
+    box.innerHTML += `
+      <div class="alert-item">
+        <div>
+          <div class="name">${u.unidade}</div>
+          <div class="tag">${u.total} ${u.total === 1 ? 'resposta registrada' : 'respostas registradas'} · CSAT Média ${u.media.toFixed(2).replace('.', ',')}</div>
+        </div>
+        <div class="alert-badge">${u.media.toFixed(2).replace('.', ',')} ★</div>
+      </div>`;
+  });
+}
+
+function renderUnitCompChart(unidades, brand) {
+  const ctx = document.getElementById('chartUnitComp');
+  if(charts.unitComp) charts.unitComp.destroy();
+
+  const barColor = brand === 'idomed' ? '#0F9B8E' : '#C0267D';
+
+  charts.unitComp = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: unidades.map(d => d.unidade),
+      datasets:[{ label:'Nota Média (CSAT)', data: unidades.map(d => d.media), backgroundColor: barColor, borderRadius:6 }]
+    },
+    options:{ 
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis:'y', 
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ min:0, max:5, ticks:{ color:'#C4B5FD' }, grid:{ color:'rgba(255,255,255,0.05)' } },
+        y:{ ticks:{ color:'#FFF', font:{ size:11 } }, grid:{ display:false } }
+      }
+    }
+  });
+}
+
+function renderUnitCards(unidades, brand) {
+  const grid = document.getElementById('unitGridCards');
+  grid.innerHTML = '';
+  const pillClass = brand === 'idomed' ? 'idomed-pill' : 'wyden-pill';
+
+  unidades.forEach(u => {
+    const pct5 = ((u.nota5 / u.total) * 100).toFixed(1).replace('.', ',');
+    grid.innerHTML += `
+      <div class="unit-card">
+        <div class="unit-card-header">
+          <div>
+            <div class="unit-card-title">${u.unidade}</div>
+            <span class="tag-pill ${pillClass}">${u.fonte}</span>
+          </div>
+          <div class="alert-badge">${u.media.toFixed(2).replace('.', ',')} ★</div>
+        </div>
+        <div class="unit-card-stats">
+          <div class="unit-stat-item">Total Respostas<div class="unit-stat-val">${u.total} ${u.total === 1 ? 'aluno' : 'alunos'}</div></div>
+          <div class="unit-stat-item">Notas Máximas (5)<div class="unit-stat-val">${pct5}%</div></div>
+        </div>
+      </div>`;
+  });
+}
+
+function renderTable() {
+  const data = getFilteredData(currentBrand);
+  const search = document.getElementById('searchBox').value.toLowerCase().trim();
+  let filtered = data.respostas.filter(d => 
+    d.unidade.toLowerCase().includes(search) || 
+    d.motivo.toLowerCase().includes(search) ||
+    d.fonte.toLowerCase().includes(search) ||
+    d.matricula.toLowerCase().includes(search)
+  );
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+
+  const pillClass = currentBrand === 'idomed' ? 'idomed-pill' : 'wyden-pill';
+
+  filtered.forEach((d, idx) => {
+    tbody.innerHTML += `
+      <tr>
+        <td style="text-align:center;">
+          <button class="btn-table-action" onclick="openRowQa(${idx})">👁️ Ver Perguntas</button>
+        </td>
+        <td class="unit-cell">${d.unidade}</td>
+        <td><span class="tag-pill ${pillClass}">${d.fonte}</span></td>
+        <td><span class="tag-pill" style="background:rgba(255,255,255,0.1); color:#FFF;">${d.avaliacao} ★</span></td>
+        <td>${d.nosso_canal}</td>
+        <td>${d.outro_canal}</td>
+        <td>${d.motivo}</td>
+        <td>${d.matricula || '—'}</td>
+        <td>${d.timestamp}</td>
+      </tr>`;
+  });
+  window.currentFilteredData = filtered;
+}
+
+document.getElementById('periodSwitch').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  document.querySelectorAll('#periodSwitch button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBrand = btn.dataset.period;
+  renderDashboard(currentBrand);
+});
+
+document.getElementById('tabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('section.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + btn.dataset.view).classList.add('active');
+});
+
+function showQaModal(d) {
+  const modal = document.getElementById('qaModal');
+  const modalBadge = document.getElementById('modalBrandBadge');
+  modalBadge.textContent = d.fonte;
+  modalBadge.className = 'tag-pill ' + (d.fonte === 'IDOMED' ? 'idomed-pill' : 'wyden-pill');
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-q-card">
+      <div class="modal-q-title">❓ 1. Em qual unidade/campus você foi atendido?</div>
+      <div class="modal-q-answer">💬 ${d.unidade}</div>
+    </div>
+    <div class="modal-q-card">
+      <div class="modal-q-title">❓ 2. Como você avalia a sua experiência com nosso atendimento?</div>
+      <div class="modal-q-answer">💬 Nota ${d.avaliacao} de 5 ⭐</div>
+    </div>
+    <div class="modal-q-card">
+      <div class="modal-q-title">❓ 3. Você recebeu contato de cobrança através do nosso canal próprio?</div>
+      <div class="modal-q-answer">💬 ${d.nosso_canal}</div>
+    </div>
+    <div class="modal-q-card">
+      <div class="modal-q-title">❓ 4. Você recebeu contato de cobrança através de canais externos / terceirizados?</div>
+      <div class="modal-q-answer">💬 ${d.outro_canal}</div>
+    </div>
+    <div class="modal-q-card">
+      <div class="modal-q-title">❓ 5. Qual o principal motivo que fez você optar pelo nosso atendimento?</div>
+      <div class="modal-q-answer">💬 ${d.motivo}</div>
+    </div>
+    <div class="modal-q-card">
+      <div class="modal-q-title">❓ 6. Informe sua matrícula (Opcional):</div>
+      <div class="modal-q-answer">💬 ${d.matricula || 'Não informada pelo aluno'}</div>
+    </div>
+  `;
+  modal.style.display = 'flex';
+}
+
+function closeQaModal() { document.getElementById('qaModal').style.display = 'none'; }
+function openRowQa(idx) { if (window.currentFilteredData && window.currentFilteredData[idx]) showQaModal(window.currentFilteredData[idx]); }
+function scrollTable(amt) { document.querySelector('#dataTable').parentElement.scrollBy({ left: amt, behavior: 'smooth' }); }
+
+// Inicialização
+renderDashboard('wyden');
+</script>
+</body>
+</html>
+>>>>>>> 41a465c6694f70ff4d4c629051456762b397c155
