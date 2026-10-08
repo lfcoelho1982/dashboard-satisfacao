@@ -1,90 +1,200 @@
-import pandas as pd
-import json
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Pesquisa de Satisfação — ATP 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
-# Process Wyden
-df_wyden = pd.read_excel('Pesquisa de Satisfação ATP_Wyden (respostas) (1).xlsx')
-print("Wyden cols:", df_wyden.columns.tolist())
+:root {
+  --bg: #0F0811;
+  --bg-gradient: linear-gradient(135deg, #0F0811 0%, #1B0C1E 50%, #120815 100%);
+  --panel-bg: linear-gradient(145deg, rgba(42, 18, 46, 0.75) 0%, rgba(22, 10, 25, 0.85) 100%);
+  --panel-card: linear-gradient(135deg, rgba(50, 22, 54, 0.9) 0%, rgba(28, 12, 30, 0.95) 100%);
+  --stroke: #522454;
+  --stroke-soft: #301432;
+  --text: #F8FAFC;
+  --text-dim: #C4B5FD;
+  --text-faint: #8B789C;
+  --brand-primary: #E31C23;
+  --brand-primary-grad: linear-gradient(135deg, #E31C23 0%, #B81419 100%);
+  --brand-secondary: #A3125B;
+  --brand-secondary-grad: linear-gradient(135deg, #C2186C 0%, #7A0C42 100%);
+  --brand-accent: #FAA61A;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --glow: rgba(227, 28, 35, 0.25);
+}
 
-# Columns:
-# 0: Carimbo de data/hora
-# 1: Você recebeu alguma mensagem, e-mail ou ligação de cobrança que direcionou você ao nosso canal de atendimento?
-# 2: Você recebeu acionamento de outros canais de atendimento?
-# 3: Unnamed: 3 (Motivo)
-# 4: Como você avalia nosso atendimento de negociação?
-# 5: Em qual unidade você foi atendido?
-# 6: Qual sua matrícula? (Opcional - uso interno para análise)
-# 8: O que fez você optar por nosso canal de atendimento? (alternative column for motivo)
+body.theme-todos {
+  --bg: #0B0F19;
+  --bg-gradient: linear-gradient(135deg, #0B0F19 0%, #111827 50%, #0F172A 100%);
+  --panel-bg: linear-gradient(145deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
+  --panel-card: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+  --stroke: #38BDF8;
+  --stroke-soft: #1E293B;
+  --text: #F8FAFC;
+  --text-dim: #93C5FD;
+  --text-faint: #64748B;
+  --brand-primary: #38BDF8;
+  --brand-primary-grad: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+  --brand-secondary: #818CF8;
+  --brand-secondary-grad: linear-gradient(135deg, #818CF8 0%, #4F46E5 100%);
+  --brand-accent: #F59E0B;
+  --glow: rgba(56, 189, 248, 0.25);
+}
 
-def get_motivo_wyden(row):
-    m3 = str(row['Unnamed: 3']) if pd.notna(row['Unnamed: 3']) else ''
-    m8 = str(row['O que fez você optar por nosso canal de atendimento?']) if pd.notna(row['O que fez você optar por nosso canal de atendimento?']) else ''
-    res = m3 if m3 else m8
-    return res if res else 'Apenas procurei atendimento, sem escolher nenhum canal especifico'
+body.theme-estacio {
+  --bg: #03141C;
+  --bg-gradient: linear-gradient(135deg, #02111A 0%, #062433 50%, #0B3547 100%);
+  --panel-bg: linear-gradient(145deg, rgba(11, 41, 56, 0.75) 0%, rgba(6, 28, 38, 0.85) 100%);
+  --panel-card: linear-gradient(135deg, rgba(14, 53, 71, 0.9) 0%, rgba(8, 32, 44, 0.95) 100%);
+  --stroke: #24AABC;
+  --stroke-soft: #0B5E75;
+  --text: #F0FDF4;
+  --text-dim: #BFE0D7;
+  --text-faint: #79C5BF;
+  --brand-primary: #07BBE9;
+  --brand-primary-grad: linear-gradient(135deg, #07BBE9 0%, #0288AD 100%);
+  --brand-secondary: #24AABC;
+  --brand-secondary-grad: linear-gradient(135deg, #24AABC 0%, #0E7490 100%);
+  --brand-accent: #79C5BF;
+  --glow: rgba(7,187,233,0.20);
+}
 
-wyden_respostas = []
-for idx, row in df_wyden.iterrows():
-    ts = str(row['Carimbo de data/hora'])
-    nosso = str(row['Você recebeu alguma mensagem, e-mail ou ligação de cobrança que direcionou você ao nosso canal de atendimento?']).strip().capitalize()
-    outro = str(row['Você recebeu acionamento de outros canais de atendimento?']).strip().capitalize()
-    eval_val = int(row['Como você avalia nosso atendimento de negociação?'])
-    unid = str(row['Em qual unidade você foi atendido?']).strip()
-    matr = str(row['Qual sua matrícula? (Opcional - uso interno para análise)']) if pd.notna(row['Qual sua matrícula? (Opcional - uso interno para análise)']) else ''
-    if matr == 'nan': matr = ''
-    mot = get_motivo_wyden(row)
-    
-    wyden_respostas.append({
-        'timestamp': ts,
-        'fonte': 'Wyden',
-        'unidade': unid,
-        'avaliacao': eval_val,
-        'motivo': mot,
-        'nosso_canal': nosso,
-        'outro_canal': outro,
-        'matricula': matr
-    })
+body.theme-wyden {
+  --bg: #180814;
+  --bg-gradient: linear-gradient(135deg, #160712 0%, #270A1F 40%, #380C29 75%, #160611 100%);
+  --panel-bg: linear-gradient(145deg, rgba(58, 13, 42, 0.65) 0%, rgba(30, 8, 23, 0.85) 100%);
+  --panel-card: linear-gradient(135deg, rgba(74, 18, 52, 0.8) 0%, rgba(42, 10, 31, 0.92) 100%);
+  --stroke: #C0267D;
+  --stroke-soft: #631242;
+  --text: #FFF5F8;
+  --text-dim: #FBCFE8;
+  --text-faint: #FF9E8B;
+  --brand-primary: #FF7A66;
+  --brand-primary-grad: linear-gradient(135deg, #FF7A66 0%, #C0267D 100%);
+  --brand-secondary: #C0267D;
+  --brand-secondary-grad: linear-gradient(135deg, #C0267D 0%, #8B1E61 100%);
+  --brand-accent: #FFB74D;
+  --glow: rgba(255, 122, 102, 0.25);
+}
 
-print(f"Wyden total: {len(wyden_respostas)}")
+body.theme-idomed {
+  --bg: #031312;
+  --bg-gradient: linear-gradient(135deg, #020F0E 0%, #072624 50%, #0A3F3C 100%);
+  --panel-bg: linear-gradient(145deg, rgba(10, 63, 60, 0.7) 0%, rgba(5, 33, 31, 0.85) 100%);
+  --panel-card: linear-gradient(135deg, rgba(15, 79, 75, 0.85) 0%, rgba(7, 42, 40, 0.95) 100%);
+  --stroke: #0F9B8E;
+  --stroke-soft: #0A3F3C;
+  --text: #F0FAF9;
+  --text-dim: #99F6E4;
+  --text-faint: #5EEAD4;
+  --brand-primary: #0F9B8E;
+  --brand-primary-grad: linear-gradient(135deg, #2DD4BF 0%, #0F9B8E 100%);
+  --brand-secondary: #65D3C8;
+  --brand-secondary-grad: linear-gradient(135deg, #65D3C8 0%, #0D9488 100%);
+  --brand-accent: #FB923C;
+  --glow: rgba(15,155,142,0.22);
+}
 
-# Process Estácio
-df_estacio = pd.read_excel('Pesquisa de Satisfação ATP_Estácio (respostas) (1).xlsx')
-print("Estacio cols:", df_estacio.columns.tolist())
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{
+  background: var(--bg-gradient);
+  color:var(--text); font-family:var(--font-body); -webkit-font-smoothing:antialiased;
+  transition: background 0.4s ease, color 0.4s ease;
+  min-height:100vh; padding-bottom:60px;
+}
 
-# Columns for Estacio:
-# 0: Carimbo de data/hora
-# 1: Você recebeu alguma mensagem, e-mail ou ligação de cobrança que direcionou você ao nosso canal de atendimento?
-# 2: Você recebeu acionamento de outros canais de atendimento?
-# 3: O que fez você optar por nosso canal de atendimento?
-# 4: Como você avalia nosso atendimento de negociação?
-# 5: Em qual unidade você foi atendido?
-# 6: Qual sua matrícula? (Opcional - uso interno para análise)
-# 9: O que fez você optar por nosso canal de atendimento?.1
+::selection{background:var(--brand-primary); color:#000;}
 
-def get_motivo_estacio(row):
-    m3 = str(row['O que fez você optar por nosso canal de atendimento?']) if pd.notna(row['O que fez você optar por nosso canal de atendimento?']) else ''
-    m9 = str(row['O que fez você optar por nosso canal de atendimento?.1']) if pd.notna(row['O que fez você optar por nosso canal de atendimento?.1']) else ''
-    res = m3 if m3 else m9
-    return res if res else 'Apenas procurei atendimento, sem escolher nenhum canal especifico'
+::-webkit-scrollbar{width:8px; height:8px;}
+::-webkit-scrollbar-track{background:rgba(0,0,0,0.2);}
+::-webkit-scrollbar-thumb{background:var(--stroke); border-radius:4px;}
 
-estacio_respostas = []
-for idx, row in df_estacio.iterrows():
-    ts = str(row['Carimbo de data/hora'])
-    nosso = str(row['Você recebeu alguma mensagem, e-mail ou ligação de cobrança que direcionou você ao nosso canal de atendimento?']).strip().capitalize()
-    outro = str(row['Você recebeu acionamento de outros canais de atendimento?']).strip().capitalize()
-    eval_val = int(row['Como você avalia nosso atendimento de negociação?'])
-    unid = str(row['Em qual unidade você foi atendido?']).strip()
-    matr = str(row['Qual sua matrícula? (Opcional - uso interno para análise)']) if pd.notna(row['Qual sua matrícula? (Opcional - uso interno para análise)']) else ''
-    if matr == 'nan': matr = ''
-    mot = get_motivo_estacio(row)
-    
-    estacio_respostas.append({
-        'timestamp': ts,
-        'fonte': 'Estácio',
-        'unidade': unid,
-        'avaliacao': eval_val,
-        'motivo': mot,
-        'nosso_canal': nosso,
-        'outro_canal': outro,
-        'matricula': matr
-    })
+.wrap{max-width:1380px; margin:0 auto; padding:0 28px;}
 
-print(f"Estacio total: {len(estacio_respostas)}")
+header.top{
+  border-bottom:1px solid var(--stroke-soft);
+  background: linear-gradient(180deg, rgba(15,23,42,0.95) 0%, rgba(10,14,23,0.85) 100%);
+  padding:22px 0 0 0; position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(16px); transition: all 0.3s ease;
+}
+.top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap; padding-bottom:18px;}
+.brand{display:flex; align-items:center; gap:14px;}
+.brand-mark{
+  width:46px; height:46px; border-radius:14px;
+  background: var(--brand-primary-grad);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; color:#FFFFFF; font-size:22px;
+  flex-shrink:0; box-shadow: 0 4px 16px var(--glow);
+  transition: all 0.3s ease;
+}
+.brand h1{font-family:var(--font-display); font-size:21px; font-weight:700; letter-spacing:0.2px;}
+.brand p{font-size:12px; color:var(--text-dim); margin-top:2px; font-family:var(--font-mono); letter-spacing:0.4px;}
+
+.period-switch{display:flex; gap:6px; background:rgba(0,0,0,0.3); border:1px solid var(--stroke-soft); border-radius:12px; padding:4px;}
+.period-switch button{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:0.5px; color:var(--text-dim);
+  background:transparent; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;
+  transition:all .25s ease; text-transform:uppercase; font-weight:600;
+  display:flex; align-items:center; gap:8px;
+}
+.period-switch button:hover{color:var(--text); background:rgba(255,255,255,0.05);}
+.period-switch button.active{
+  background: var(--brand-primary-grad); color:#FFFFFF;
+  box-shadow: 0 4px 12px var(--glow);
+}
+.period-switch button.active.btn-todos { background: linear-gradient(135deg, #38BDF8 0%, #4F46E5 100%); color: #FFFFFF; }
+.period-switch button.active.btn-estacio { background: linear-gradient(135deg, #07BBE9 0%, #0288AD 100%); color: #FFFFFF; font-weight:700; }
+.period-switch button.active.btn-wyden { background: linear-gradient(135deg, #E85A47 0%, #A4206B 100%); color: #FFFFFF; }
+.period-switch button.active.btn-idomed { background: linear-gradient(135deg, #2DD4BF 0%, #0F9B8E 100%); color: #FFFFFF; }
+
+nav.tabs{display:flex; gap:6px; border-bottom:1px solid var(--stroke-soft); margin-top:4px;}
+nav.tabs button{
+  font-family:var(--font-body); font-size:13.5px; font-weight:600; color:var(--text-faint);
+  background:transparent; border:none; padding:12px 20px; cursor:pointer; position:relative; top:1px;
+  border-bottom:2px solid transparent; transition:all .2s ease;
+}
+nav.tabs button:hover{color:var(--text-dim);}
+nav.tabs button.active{color:var(--text); border-bottom-color:var(--brand-primary);}
+
+main{padding-top:26px;}
+section.view{display:none;}
+section.view.active{display:block; animation:fade .35s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+.eyebrow{font-family:var(--font-mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-faint); margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+.eyebrow::before{content:''; width:16px; height:1px; background:var(--stroke); display:inline-block;}
+
+.hero{display:grid; grid-template-columns:1.3fr 1fr; gap:20px; margin-bottom:22px;}
+@media (max-width:920px){ .hero{grid-template-columns:1fr;} }
+
+.hero-card{
+  background: var(--panel-card);
+  border:1px solid var(--stroke); border-radius:18px; padding:26px 28px; position:relative; overflow:hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.hero-card::after{
+  content:''; position:absolute; right:-40px; top:-40px; width:220px; height:220px; border-radius:50%;
+  background:radial-gradient(circle, var(--glow), transparent 70%); pointer-events:none;
+}
+.hero-label{font-family:var(--font-mono); font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.8px;}
+.hero-value{
+  font-family:var(--font-display); font-size:46px; font-weight:700; margin-top:8px;
+  background: var(--brand-primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing:-0.5px; display:inline-block;
+}
+.hero-sub{display:flex; align-items:center; gap:10px; margin-top:10px; font-size:13px; color:var(--text-dim);}
+.delta{font-family:var(--font-mono); font-weight:600; padding:4px 10px; border-radius:6px; font-size:12px; background:rgba(255,255,255,0.08); color:var(--text);}
+
+.hero-split{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+.split-card{
+  background: var(--panel-card); border:1px solid var(--stroke); border-radius:18px; padding:22px 24px; display:flex; flex-direction:column; justify-content:space-between;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.split-card .hero-label{margin-bottom:8px;}
+.split-card .hero-value{font-size
