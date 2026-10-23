@@ -1,191 +1,301 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard de Satisfação ATP - Estácio, Wyden & IDOMED</title>
+  <title>Dashboard de Satisfação ATP - Executive Dark Premium</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            dark: {
+              bg: '#0B0F17',
+              card: '#111827',
+              border: '#1F2937',
+              header: '#0F172A',
+              hover: '#1E293B'
+            },
+            accent: {
+              blue: '#38BDF8',
+              emerald: '#34D399',
+              purple: '#A78BFA',
+              amber: '#FBBF24',
+              rose: '#FB7185'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0B0F17;
+      color: #F3F4F6;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .gradient-text-blue {
+      background: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-emerald {
+      background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-purple {
+      background: linear-gradient(135deg, #C084FC 0%, #818CF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1F2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 antialiased">
-  <div class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+  <div class="flex-1 flex flex-col">
+    <!-- Executive Header -->
+    <header class="bg-dark-header/90 backdrop-blur-md border-b border-gray-800/80 sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div class="flex items-center gap-3">
-          <div class="p-2.5 bg-blue-600 rounded-xl shadow-md">
-            <i class="fa-solid fa-chart-line text-xl text-white"></i>
+        
+        <div class="flex items-center gap-3.5">
+          <div class="p-3 bg-gradient-to-br from-sky-500/20 to-blue-600/20 rounded-2xl border border-sky-500/30 text-sky-400 shadow-lg shadow-sky-500/10">
+            <i class="fa-solid fa-chart-line text-xl"></i>
           </div>
           <div>
-            <h1 class="text-xl font-extrabold tracking-tight">Painel de Satisfação ATP</h1>
-            <p class="text-xs text-slate-400">Indicadores de Qualidade e Atendimento de Negociação</p>
+            <div class="flex items-center gap-2">
+              <h1 class="text-xl font-bold tracking-tight text-white">Painel de Satisfação ATP</h1>
+              <span class="px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Executive Edition</span>
+            </div>
+            <p class="text-xs text-gray-400 mt-0.5">Visão Estratégica & Performance de Atendimento de Negociação</p>
           </div>
         </div>
-        
-        <!-- Seleção de Marca -->
-        <div class="flex items-center gap-2">
-          <label for="brandSelect" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-            <i class="fa-solid fa-filter text-blue-400"></i> Marca:
+
+        <!-- Marca Filter Dropdown -->
+        <div class="flex items-center gap-3 bg-gray-900/80 p-1.5 px-3 rounded-xl border border-gray-800">
+          <label for="brandSelect" class="text-xs font-semibold text-gray-400 flex items-center gap-2">
+            <i class="fa-solid fa-building text-sky-400"></i> Marca:
           </label>
-          <select id="brandSelect" onchange="updateDashboard()" class="bg-slate-800 text-white text-sm font-semibold rounded-lg px-3 py-2 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer hover:bg-slate-750 transition">
+          <select id="brandSelect" onchange="updateDashboard()" class="bg-gray-800 text-white text-sm font-bold rounded-lg px-3 py-1.5 border border-gray-700 focus:ring-2 focus:ring-sky-500 focus:outline-none cursor-pointer hover:bg-gray-750 transition">
             <option value="ALL">Todas as Marcas (Consolidado)</option>
             <option value="ESTACIO" selected>Estácio</option>
             <option value="WYDEN">Wyden</option>
             <option value="IDOMED">IDOMED</option>
           </select>
         </div>
+
       </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Body -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
-      <!-- KPI Cards Header -->
+      <!-- Executive KPI Strip -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
         <!-- KPI 1 -->
-        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+        <div class="glass-card p-6 rounded-2xl transition-all duration-300">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total de Respostas</p>
-              <h3 id="kpiTotal" class="text-3xl font-extrabold text-slate-900 mt-1">0</h3>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Total de Respostas</p>
+              <h3 id="kpiTotal" class="text-3xl font-black text-white mt-2 tracking-tight">0</h3>
             </div>
-            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+            <div class="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
               <i class="fa-solid fa-comments text-lg"></i>
             </div>
           </div>
-          <p class="text-xs text-slate-500 mt-3 font-medium">Pesquisas concluídas no período</p>
+          <p class="text-xs text-gray-500 mt-3 font-medium flex items-center gap-1.5">
+            <i class="fa-solid fa-check-circle text-sky-400/80"></i> Pesquisas concluídas no período
+          </p>
         </div>
 
         <!-- KPI 2 -->
-        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+        <div class="glass-card p-6 rounded-2xl transition-all duration-300">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">CSAT Médio (0 a 5)</p>
-              <h3 id="kpiCsat" class="text-3xl font-extrabold text-emerald-600 mt-1">0.00</h3>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">CSAT Médio (0 a 5)</p>
+              <h3 id="kpiCsat" class="text-3xl font-black gradient-text-emerald mt-2 tracking-tight">0.00</h3>
             </div>
-            <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+            <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
               <i class="fa-solid fa-star text-lg"></i>
             </div>
           </div>
-          <p class="text-xs text-slate-500 mt-3 font-medium">Média geral das avaliações</p>
+          <p class="text-xs text-gray-500 mt-3 font-medium flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-trend-up text-emerald-400"></i> Avaliação geral de excelência
+          </p>
         </div>
 
         <!-- KPI 3 -->
-        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+        <div class="glass-card p-6 rounded-2xl transition-all duration-300">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">% Satisfação (Notas 4 e 5)</p>
-              <h3 id="kpiPercent" class="text-3xl font-extrabold text-indigo-600 mt-1">0%</h3>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">% Satisfação (Notas 4 e 5)</p>
+              <h3 id="kpiPercent" class="text-3xl font-black gradient-text-purple mt-2 tracking-tight">0%</h3>
             </div>
-            <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
+            <div class="p-3 bg-purple-500/10 text-purple-400 rounded-xl border border-purple-500/20">
               <i class="fa-solid fa-face-smile text-lg"></i>
             </div>
           </div>
-          <p class="text-xs text-slate-500 mt-3 font-medium">Índice de promotores/satisfeitos</p>
+          <p class="text-xs text-gray-500 mt-3 font-medium flex items-center gap-1.5">
+            <i class="fa-solid fa-thumbs-up text-purple-400"></i> Promotores e satisfeitos
+          </p>
         </div>
 
         <!-- KPI 4 -->
-        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+        <div class="glass-card p-6 rounded-2xl transition-all duration-300">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Opção por Wpp Presencial</p>
-              <h3 id="kpiWpp" class="text-3xl font-extrabold text-cyan-600 mt-1">0%</h3>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Opção Wpp Presencial</p>
+              <h3 id="kpiWpp" class="text-3xl font-black text-amber-400 mt-2 tracking-tight">0%</h3>
             </div>
-            <div class="p-3 bg-cyan-50 text-cyan-600 rounded-xl">
+            <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
               <i class="fa-brands fa-whatsapp text-lg"></i>
             </div>
           </div>
-          <p class="text-xs text-slate-500 mt-3 font-medium">Atendimento presencial/confiança</p>
+          <p class="text-xs text-gray-500 mt-3 font-medium flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved text-amber-400"></i> Confiança no atendente local
+          </p>
         </div>
+
       </div>
 
-      <!-- Charts Section 1 -->
+      <!-- Main Charts Row 1 -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
         <!-- Chart 1: Distribuição CSAT -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
-              <i class="fa-solid fa-chart-bar text-blue-500"></i> Distribuição das Notas CSAT
-            </h2>
-            <span class="text-xs font-medium text-slate-400">Escala de 1 a 5</span>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-5 bg-sky-400 rounded-full"></div>
+              <h2 class="text-sm font-bold text-white tracking-wide uppercase">Distribuição das Notas CSAT</h2>
+            </div>
+            <span class="text-xs font-semibold text-gray-400 bg-gray-800/60 px-2.5 py-1 rounded-lg border border-gray-700/50">Escala 1 a 5</span>
           </div>
           <div class="h-64">
             <canvas id="chartCsat"></canvas>
           </div>
         </div>
 
-        <!-- Chart 2: Motivos de Escolha -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
-              <i class="fa-solid fa-pie-chart text-indigo-500"></i> Motivo da Escolha do Canal
-            </h2>
-            <span class="text-xs font-medium text-slate-400">Preferência do Aluno</span>
+        <!-- Chart 2: Motivos da Escolha -->
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-5 bg-purple-400 rounded-full"></div>
+              <h2 class="text-sm font-bold text-white tracking-wide uppercase">Motivo da Escolha do Canal</h2>
+            </div>
+            <span class="text-xs font-semibold text-gray-400 bg-gray-800/60 px-2.5 py-1 rounded-lg border border-gray-700/50">Preferência do Aluno</span>
           </div>
           <div class="h-64">
             <canvas id="chartMotivos"></canvas>
           </div>
         </div>
+
       </div>
 
-      <!-- Charts Section 2 -->
+      <!-- Main Charts Row 2 -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Chart 3: Direcionamento por Cobrança -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
-              <i class="fa-solid fa-bullhorn text-amber-500"></i> Recebeu Direcionamento prévio?
-            </h2>
-            <span class="text-xs font-medium text-slate-400">Mensagem / E-mail / Ligação</span>
+        
+        <!-- Chart 3: Direcionado -->
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-5 bg-amber-400 rounded-full"></div>
+              <h2 class="text-sm font-bold text-white tracking-wide uppercase">Recebeu Direcionamento Prévio?</h2>
+            </div>
+            <span class="text-xs font-semibold text-gray-400 bg-gray-800/60 px-2.5 py-1 rounded-lg border border-gray-700/50">Atuação de Cobrança</span>
           </div>
           <div class="h-60">
             <canvas id="chartDirecionado"></canvas>
           </div>
         </div>
 
-        <!-- Chart 4: Acionamento Outros Canais -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
-              <i class="fa-solid fa-headset text-rose-500"></i> Acionado por Outros Canais?
-            </h2>
-            <span class="text-xs font-medium text-slate-400">Multiplos pontos de contato</span>
+        <!-- Chart 4: Outros Canais -->
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-5 bg-rose-400 rounded-full"></div>
+              <h2 class="text-sm font-bold text-white tracking-wide uppercase">Acionado por Outros Canais?</h2>
+            </div>
+            <span class="text-xs font-semibold text-gray-400 bg-gray-800/60 px-2.5 py-1 rounded-lg border border-gray-700/50">Multi-touchpoint</span>
           </div>
           <div class="h-60">
             <canvas id="chartOutros"></canvas>
           </div>
         </div>
+
       </div>
 
-      <!-- Unidades Table / Ranking -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <h2 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-location-dot text-emerald-500"></i> Detalhamento por Unidade Atendida
-        </h2>
+      <!-- Ranking Unidades -->
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="flex justify-between items-center mb-5">
+          <div class="flex items-center gap-2.5">
+            <div class="w-2 h-5 bg-emerald-400 rounded-full"></div>
+            <h2 class="text-sm font-bold text-white tracking-wide uppercase">Performance e Atendimentos por Unidade / Campus</h2>
+          </div>
+          <span class="text-xs font-semibold text-gray-400 bg-gray-800/60 px-3 py-1 rounded-lg border border-gray-700/50">Ranking Geral</span>
+        </div>
+        
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-50">
-                <th class="py-3 px-4">Unidade / Campus</th>
-                <th class="py-3 px-4 text-right">Qtd. Respostas</th>
-                <th class="py-3 px-4 text-right">% do Total</th>
+              <tr class="border-b border-gray-800 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-900/50">
+                <th class="py-3.5 px-4 rounded-l-xl">Unidade / Campus</th>
+                <th class="py-3.5 px-4 text-right">Qtd. Respostas</th>
+                <th class="py-3.5 px-4 text-right rounded-r-xl">% do Volume</th>
               </tr>
             </thead>
-            <tbody id="unidadesTable" class="divide-y divide-slate-100 text-sm text-slate-700 font-medium">
+            <tbody id="unidadesTable" class="divide-y divide-gray-800/60 text-sm font-medium">
               <!-- Injected by JavaScript -->
             </tbody>
           </table>
         </div>
       </div>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-      <p>Dashboard de Satisfação ATP &copy; 2026 - Atualizado com dados recentes (Estácio, Wyden & IDOMED)</p>
+    <!-- Executive Footer -->
+    <footer class="bg-dark-header border-t border-gray-800/80 py-4 text-center text-xs text-gray-500">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <p>Dashboard Executive Dark Premium &copy; 2026 - Projeto ATP (Estácio, Wyden & IDOMED)</p>
+        <p class="text-gray-600 flex items-center gap-1.5"><i class="fa-solid fa-lock text-sky-500/70"></i> Relatório Diretoria</p>
+      </div>
     </footer>
   </div>
 
@@ -251,6 +361,10 @@
 
     let chartCsat, chartMotivos, chartDirecionado, chartOutros;
 
+    // Dark theme default Chart.js defaults
+    Chart.defaults.color = '#9CA3AF';
+    Chart.defaults.font.family = '"Plus Jakarta Sans", sans-serif';
+
     function initCharts() {
       // Chart 1: CSAT
       const ctx1 = document.getElementById('chartCsat').getContext('2d');
@@ -261,15 +375,26 @@
           datasets: [{
             label: 'Avaliações',
             data: [],
-            backgroundColor: ['#ef4444', '#f97316', '#f59e0b', '#3b82f6', '#10b981'],
-            borderRadius: 6
+            backgroundColor: ['#F87171', '#FB923C', '#FBBF24', '#60A5FA', '#34D399'],
+            borderRadius: 8,
+            borderSkipped: false
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } }
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9CA3AF' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#9CA3AF' }
+            }
+          }
         }
       });
 
@@ -281,15 +406,20 @@
           labels: ['WhatsApp Presencial', 'Presencial no Campus', 'Sem Canal Específico', 'Outros'],
           datasets: [{
             data: [],
-            backgroundColor: ['#06b6d4', '#6366f1', '#f59e0b', '#94a3b8'],
+            backgroundColor: ['#38BDF8', '#818CF8', '#FBBF24', '#6B7280'],
             borderWidth: 2,
-            borderColor: '#ffffff'
+            borderColor: '#111827'
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 12, padding: 16, color: '#D1D5DB', font: { size: 11, weight: 600 } }
+            }
+          }
         }
       });
 
@@ -301,13 +431,20 @@
           labels: ['Sim (Direcionado)', 'Não (Iniciativa Própria)'],
           datasets: [{
             data: [],
-            backgroundColor: ['#3b82f6', '#cbd5e1']
+            backgroundColor: ['#38BDF8', '#374151'],
+            borderWidth: 2,
+            borderColor: '#111827'
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 12, padding: 16, color: '#D1D5DB', font: { size: 11, weight: 600 } }
+            }
+          }
         }
       });
 
@@ -319,13 +456,20 @@
           labels: ['Sim (Acionado em outros)', 'Não (Somente este)'],
           datasets: [{
             data: [],
-            backgroundColor: ['#f43f5e', '#cbd5e1']
+            backgroundColor: ['#FB7185', '#374151'],
+            borderWidth: 2,
+            borderColor: '#111827'
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 12, padding: 16, color: '#D1D5DB', font: { size: 11, weight: 600 } }
+            }
+          }
         }
       });
 
@@ -401,16 +545,18 @@
       const sortedUnidades = Object.entries(unidadesObj).sort((a, b) => b[1] - a[1]);
 
       if (sortedUnidades.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="py-4 text-center text-slate-400">Nenhuma unidade registrada.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" class="py-6 text-center text-gray-500">Nenhuma unidade registrada para esta seleção.</td></tr>';
       } else {
         sortedUnidades.forEach(([unidade, count]) => {
           const pct = total > 0 ? ((count / total) * 100).toFixed(1) : '0.0';
           const row = document.createElement('tr');
-          row.className = 'hover:bg-slate-50 transition';
+          row.className = 'hover:bg-gray-800/40 transition duration-150';
           row.innerHTML = `
-            <td class="py-3 px-4 text-slate-800 font-semibold">${unidade}</td>
-            <td class="py-3 px-4 text-right font-bold text-slate-900">${count}</td>
-            <td class="py-3 px-4 text-right text-slate-500">${pct}%</td>
+            <td class="py-3.5 px-4 text-gray-200 font-semibold flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> ${unidade}
+            </td>
+            <td class="py-3.5 px-4 text-right font-bold text-white">${count}</td>
+            <td class="py-3.5 px-4 text-right text-gray-400 font-medium">${pct}%</td>
           `;
           tbody.appendChild(row);
         });
